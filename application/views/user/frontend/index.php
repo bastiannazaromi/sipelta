@@ -78,7 +78,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="<?= base_url('user/beranda'); ?>" class="brand-link ml-2">
-                <span class="brand-text font-weight-light">SIPESTA</span>
+                <span class="brand-text font-weight-light">SIPELTA</span>
             </a>
 
             <!-- Sidebar -->
