@@ -67,6 +67,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                        value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
                         <label for="filebg">Upload File</label>
                         <input type="file" class="form-control" name="filegalery" required autocomplete="off">
