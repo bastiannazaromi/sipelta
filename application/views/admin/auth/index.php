@@ -100,7 +100,6 @@ function ajax_login() {
         data: dataJson,
         dataType: 'json',
         success: function(result) {
-            let status = result.status;
             if (result.status == 'Valid') {
 
                 Swal.fire({

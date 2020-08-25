@@ -30,7 +30,7 @@ class M_Login extends CI_Model
                 return 'Password Salah';
             }
         } else {
-            return 'Username tidak terdaftar';
+            return 'NIM tidak terdaftar';
         }
     }
 }

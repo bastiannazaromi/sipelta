@@ -38,6 +38,8 @@
                 <p class="login-box-msg">Login</p>
 
                 <form action="" onsubmit="ajax_login(); return false">
+                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                        value="<?php echo $this->security->get_csrf_hash(); ?>" id="csrf_login">
                     <div class="input-group mb-3">
                         <input type="text" id="nim" name="nim" class="form-control" placeholder="nim">
                         <div class="input-group-append">
@@ -85,16 +87,22 @@
 function ajax_login() {
     let nim = $("#nim").val();
     let password = $("#password").val();
+    let csrfName = $("#csrf_login").attr('name');
+    let csrfHash = $("#csrf_login").val();
+
+    var dataJson = {
+        [csrfName]: csrfHash,
+        nim: nim,
+        password: password
+    };
 
     $.ajax({
         url: "<?= base_url('user/login/login'); ?>",
         type: "POST",
-        data: {
-            nim: nim,
-            password: password
-        },
+        data: dataJson,
+        dataType: 'json',
         success: function(result) {
-            if (result == 'Valid') {
+            if (result.status == 'Valid') {
 
                 Swal.fire({
                     title: 'Success',
@@ -110,12 +118,13 @@ function ajax_login() {
             } else {
                 Swal.fire({
                     title: 'Sorry !!',
-                    text: result,
+                    text: result.status,
                     icon: 'warning'
                 });
 
-                $('#username').val("");
+                $('#nim').val("");
                 $('#password').val("");
+                $("#csrf_login").val(result.token);
             }
         }
     });

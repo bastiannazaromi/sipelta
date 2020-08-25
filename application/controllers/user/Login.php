@@ -27,9 +27,10 @@ class Login extends CI_Controller
         $password = $this->input->post("password");
 
         $this->load->model('M_Login');
-        $a = $this->M_Login->cek_login($nim, $password);
+        $data['status'] = $this->M_Login->cek_login($nim, $password);
+        $data['token'] = $this->security->get_csrf_hash();
 
-        echo $a;
+        echo json_encode($data);
     }
 
     public function logout()
