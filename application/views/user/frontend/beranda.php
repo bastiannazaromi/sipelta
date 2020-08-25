@@ -155,13 +155,7 @@
                         <div class="row">
 
                             <?php foreach ($galery as $hasil) : ?>
-                            <!-- <div class="col-md-3 col-6">
-                                <a href="<?= base_url('assets/uploads/galery/' . $hasil['galery']); ?>"
-                                    data-toggle="lightbox" data-gallery="gallery">
-                                    <img src="<?= base_url('assets/uploads/galery/' . $hasil['galery']); ?>"
-                                        class="imggallery">
-                                </a>
-                            </div> -->
+
                             <div class="col-lg-3 col-md-4 col-6">
                                 <a href="<?= base_url('assets/uploads/galery/' . $hasil['galery']); ?>"
                                     data-toggle="lightbox" data-gallery="gallery" class="d-block mb-4 h-100">

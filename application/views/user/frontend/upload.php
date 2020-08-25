@@ -43,6 +43,9 @@
                 <div class="card-body ">
                     <form action="<?= base_url('user/dapur/uploadBerkas'); ?>" method="post"
                         enctype="multipart/form-data">
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                            value="<?php echo $this->security->get_csrf_hash(); ?>" id="csrf_login">
+
                         <div class="form-group">
                             <label for="jurnal">Jurnal <small class="text-dark">( Format : pdf || max : 2 MB
                                     )</small></label>
