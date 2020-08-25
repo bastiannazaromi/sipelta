@@ -389,7 +389,7 @@ class Dapur extends CI_Controller
                     $this->db->insert('tb_produk', $data);
                 }
 
-                $this->session->set_flashdata('lembar_produk', 'Laporan word sukses terupload');
+                $this->session->set_flashdata('lembar_produk', 'Lembar penyerahan produk sukses terupload');
             }
         }
 
