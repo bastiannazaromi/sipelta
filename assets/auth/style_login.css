@@ -1,0 +1,83 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-top: 40px;
+}
+
+/*#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background-color: #f5f5f5;
+	font-size: 0.9em;
+	height: 50px;
+	text-align: center;
+	padding-top: 20px;
+}*/
+body {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.form-login {
+	margin-top: 7%;
+}
+
+.wrap {
+	width: 100%;
+	margin: auto;
+	background: #FFFF;
+}
+
+.header {
+	background: #00BFFF;
+	padding: 1px 1px;
+}
+
+.badan {
+	padding: 30px;
+	background: #E0FFFF;
+	position: relative;
+	border-radius: 30px;
+}
+
+.inputan-login .form-control {
+	background: #D3D3D3;
+}
+
+.inputan-login .form-control:hover {
+	background-color: #fff;
+}
+
+h3.judul-login {
+	font-size: 25px;
+	margin-bottom: 20px;
+}
+
+.footer {
+	margin-top: 5px;
+	background: #00BFFF;
+	padding: 13px 13px;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+
+.tombol-submit {
+	background-color: #00BFFF;
+	color: black;
+	border: 2px solid #D3D3D3;
+	text-align: center;
+	padding: 5px 5px;
+	font-size: 24px;
+}
+
+.tombol-submit:hover {
+	background-color: white;
+	color: #6495ED;
+	border: 2px solid #6495ED;
+}
