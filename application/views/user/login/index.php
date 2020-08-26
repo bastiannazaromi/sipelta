@@ -26,7 +26,7 @@
         <div class="login-logo">
             <a href="#"><img src="<?= base_url('assets/uploads/poltek.png'); ?>" style="margin-bottom:10px"
                     class="img-fluid" width="120" /></a><br />
-            <a href="#"><b>SIPELTA</b><br />DIII Teknik Komputer</a>
+            <a href="#"><b>SIKAPTA</b><br />DIII Teknik Komputer</a>
         </div>
         <!-- /.login-logo -->
 

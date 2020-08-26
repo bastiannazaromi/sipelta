@@ -76,7 +76,7 @@
 
                     <div class="col-11 col-xl-2">
                         <h1 class="mb-0 site-logo"><a href="<?= base_url('user/beranda'); ?>"
-                                class="text-black h2 mb-0">SIPELTA </a></h1>
+                                class="text-black h2 mb-0">SIKAPTA </a></h1>
                     </div>
                     <div class="col-12 col-md-10 d-none d-xl-block">
                         <nav class="site-navigation position-relative text-right" role="navigation">
