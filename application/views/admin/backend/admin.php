@@ -85,6 +85,8 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <form action="<?= base_url('admin/admin/tambah'); ?>" method="post">
+            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                value="<?php echo $this->security->get_csrf_hash(); ?>">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Admin</h5>

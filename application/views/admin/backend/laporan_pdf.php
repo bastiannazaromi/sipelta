@@ -6,6 +6,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <?php echo form_open('admin/laporan_pdf/multiple_delete'); ?>
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                            value="<?php echo $this->security->get_csrf_hash(); ?>">
                         <table id="example" class="table table-bordered table-hover">
                             <thead class="bg-light text-dark">
                                 <tr>
