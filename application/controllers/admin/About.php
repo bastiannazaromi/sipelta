@@ -29,7 +29,7 @@ class About extends CI_Controller
     public function tambah()
     {
         $data = [
-            "deskripsi" => htmlspecialchars($this->input->post('deskripsi', TRUE))
+            "deskripsi" => $this->input->post('deskripsi', TRUE)
         ];
 
         $this->about->tambah($data);
@@ -42,7 +42,7 @@ class About extends CI_Controller
     public function edit()
     {
         $data = [
-            "deskripsi" => htmlspecialchars($this->input->post('deskripsi', TRUE))
+            "deskripsi" => $this->input->post('deskripsi', TRUE)
         ];
 
         $this->about->edit($data);
