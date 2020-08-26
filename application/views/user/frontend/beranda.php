@@ -192,7 +192,7 @@
                     <div class="col-md-12">
                         <p class="text-white">
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy; SIPELTA
+                            Copyright &copy; SIKAPTA
                         </p>
                     </div>
 

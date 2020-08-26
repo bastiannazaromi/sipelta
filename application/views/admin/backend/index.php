@@ -261,8 +261,7 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <strong>&copy; <a href="http://d3komputerphb.net/sipelta"
-                    target='_blank'>d3komputerphb.net/sipelta</a></strong>
+            <strong>&copy; <a href="http://d3komputerphb.id" target='_blank'>Beranda SIKAPTA</a></strong>
         </footer>
 
         <!-- Control Sidebar -->
