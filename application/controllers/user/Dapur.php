@@ -207,7 +207,8 @@ class Dapur extends CI_Controller
         ]);
         $this->form_validation->set_rules('pas_konfir', 'Password Konfirmasi', 'required|trim|min_length[8]|matches[pas_baru]', [
             'required' => 'Password konfirmasi harap di isi !',
-            'matches' => 'Password konfirmasi salah !'
+            'matches' => 'Password konfirmasi salah !',
+            'min_length' => 'Password kurang dari 8'
         ]);
 
         if ($this->form_validation->run() == false) {

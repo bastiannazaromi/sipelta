@@ -86,34 +86,50 @@ class Admin extends CI_Controller
 
     public function updatePass()
     {
-        $id = $this->input->post('id');
+        $this->form_validation->set_rules('pas_lama', 'Password Baru', 'required', [
+            'required' => 'Password lama harap di isi !'
+        ]);
+        $this->form_validation->set_rules('pas_baru', 'Password Baru', 'required|trim|min_length[5]', [
+            'required' => 'Password baru harap di isi !',
+            'min_length' => 'Password kurang dari 5'
+        ]);
+        $this->form_validation->set_rules('pas_konfir', 'Password Konfirmasi', 'required|trim|min_length[5]|matches[pas_baru]', [
+            'required' => 'Password konfirmasi harap di isi !',
+            'matches' => 'Password konfirmasi salah !',
+            'min_length' => 'Password kurang dari 5'
+        ]);
 
-        $admin = $this->admin->getOne($id);
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Profil Admin';
 
-        $pas_lama = $this->input->post('pas_lama', TRUE);
-        $pas_baru = $this->input->post('pas_baru', TRUE);
-        $pas_konfir = $this->input->post('pas_konfir', TRUE);
+            $id = $this->input->post('id');
+            $data['admin'] = $this->admin->getOne($id);
 
-        if (password_verify($pas_lama, $admin[0]['password'])) {
-            if ($pas_baru == $pas_konfir) {
+            $data['page'] = 'admin/backend/profile';
+
+            $this->load->view('admin/backend/index', $data);
+        } else {
+            $id = $this->input->post('id');
+            $admin = $this->admin->getOne($id);
+
+            $pas_lama = $this->input->post('pas_lama', TRUE);
+            $pas_baru = $this->input->post('pas_baru', TRUE);
+
+            if (password_verify($pas_lama, $admin[0]['password'])) {
                 $data = [
                     "password" =>  password_hash($pas_baru, PASSWORD_DEFAULT)
                 ];
 
-                $this->admin->resetPassword($data, $id);
+                $this->admin->resetPassword($data, $admin[0]['id']);
 
                 $this->session->set_flashdata('flash-sukses', 'Password berhasil diupdate');
 
                 redirect('admin/admin/profile', 'refresh');
             } else {
-                $this->session->set_flashdata('flash-error', 'Password konfirmasi salah');
+                $this->session->set_flashdata('flash-error', 'Password lama salah');
 
                 redirect('admin/admin/profile', 'refresh');
             }
-        } else {
-            $this->session->set_flashdata('flash-error', 'Password lama salah');
-
-            redirect('admin/admin/profile', 'refresh');
         }
     }
 

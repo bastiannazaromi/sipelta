@@ -23,14 +23,36 @@ class Login extends CI_Controller
 
     public function login()
     {
-        $nim = $this->input->post("nim");
-        $password = $this->input->post("password");
+        $this->form_validation->set_rules('nim', 'NIM', 'required|min_length[8]', [
+            'required' => 'NIM tidak boleh kosong !',
+            'min_length' => 'NIM kurang dari 8 digit !'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[8]', [
+            'required' => 'Password harap di isi !',
+            'min_length' => 'Password kurang dari 8'
+        ]);
 
-        $this->load->model('M_Login');
-        $data['status'] = $this->M_Login->cek_login($nim, $password);
-        $data['token'] = $this->security->get_csrf_hash();
+        if ($this->form_validation->run() == false) {
 
-        echo json_encode($data);
+            if (form_error('nim', '-- ', ' --')) {
+                $data['status'] = form_error('nim', '-- ', ' --');
+            } else {
+                $data['status'] = form_error('password', '-- ', ' --');
+            }
+
+            $data['token'] = $this->security->get_csrf_hash();
+
+            echo json_encode($data);
+        } else {
+            $nim = $this->input->post("nim");
+            $password = $this->input->post("password");
+
+            $this->load->model('M_Login');
+            $data['status'] = $this->M_Login->cek_login($nim, $password);
+            $data['token'] = $this->security->get_csrf_hash();
+
+            echo json_encode($data);
+        }
     }
 
     public function logout()

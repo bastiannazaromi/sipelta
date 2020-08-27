@@ -332,4 +332,20 @@ $(document).ready(function() {
             $(".check-item").prop("checked", false);
     });
 });
+
+function bacaGambar(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#gambar_nodin').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#image").change(function() {
+    bacaGambar(this);
+});
 </script>

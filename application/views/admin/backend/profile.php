@@ -53,16 +53,19 @@
                                     <label for="pas_lama">Password Lama</label>
                                     <input type="password" class="form-control" id="pas_lama" name="pas_lama" required
                                         autocomplete="off">
+                                    <?= form_error('pas_lama', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="pas_baru">Password Baru</label>
                                     <input type="password" class="form-control" id="pas_baru" name="pas_baru" required
                                         autocomplete="off">
+                                    <?= form_error('pas_baru', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="pas_konfir">Konfirmasi Password Baru</label>
                                     <input type="password" class="form-control" id="pas_konfir" name="pas_konfir"
                                         required autocomplete="off">
+                                    <?= form_error('pas_konfir', '<small class="text-danger">', '</small>'); ?>
                                 </div>
                                 <button type="submit" name="update" class="btn btn-success btn-block">Update</button>
                             </form>
