@@ -92,8 +92,7 @@
                                 <li><a href="#" class="nav-link"
                                         onclick="window.location='<?= base_url('user/login'); ?>'">LOGIN</a></li>
                                 <?php else : ?>
-                                <li><a href="#" class="nav-link"
-                                        onclick="window.location='<?= base_url('user/logout'); ?>'" data-toggle="modal"
+                                <li><a href="#" class="nav-link" data-toggle="modal"
                                         data-target="#logoutModal">LOGOUT</a></li>
                                 <?php endif ?>
                             </ul>
