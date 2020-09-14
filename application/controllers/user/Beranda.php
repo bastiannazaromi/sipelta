@@ -23,7 +23,7 @@ class Beranda extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'SIPESTA';
+        $data['title'] = 'SIKAPTA';
 
         $nim = $this->session->userdata('nim');
         $data['mahasiswa'] = $this->mahasiswa->getOne($nim);

@@ -29,7 +29,7 @@ class Dapur extends CI_Controller
         $nim = $this->session->userdata('nim');
         cek_biodata($nim);
 
-        $data['title'] = 'SIPESTA UPLOAD';
+        $data['title'] = 'SIKAPTA UPLOAD';
 
         $data['mahasiswa'] = $this->mahasiswa->getOne($nim);
 
