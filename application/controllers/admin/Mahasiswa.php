@@ -13,6 +13,13 @@ class Mahasiswa extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
+        $this->u2		= $this->uri->segment(2);
+        $this->u3		= $this->uri->segment(3);
+        $this->u4		= $this->uri->segment(4);
+        $this->u5		= $this->uri->segment(5);
+        $this->u6		= $this->uri->segment(6);
+        $this->u7		= $this->uri->segment(7);
+
         $this->load->model('M_Mahasiswa', 'mahasiswa');
         $this->load->model('M_Dosen', 'dosen');
     }
@@ -22,46 +29,74 @@ class Mahasiswa extends CI_Controller
         $data['title'] = 'List Mahasiswa';
         $data['page'] = 'admin/backend/mahasiswa';
 
-        $data['mahasiswa'] = $this->mahasiswa->getAll();
+        $data['mahasiswa'] = $this->mahasiswa->getAll(dekrip($this->u4), 'tb_mahasiswa');
         $data['dosen'] = $this->dosen->getAll();
+
+        $this->session->set_userdata('previous_url', current_url());
 
         $this->load->view('admin/backend/index', $data);
     }
 
     public function tambah()
     {
+        $semester = htmlspecialchars($this->input->post('semester', TRUE));
+        if ($semester == 4)
+        {
+            $dosbing2 = null;
+            $kategori = null;
+        }
+        else
+        {
+            $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
+            $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
+        }
         $data = [
             "nim" => htmlspecialchars($this->input->post('nim', TRUE)),
             "password" => password_hash($this->input->post('nim', TRUE), PASSWORD_DEFAULT),
             "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
+            "semester" => $semester,
             "judul" => htmlspecialchars($this->input->post('judul', TRUE)),
-            "kategori" => htmlspecialchars($this->input->post('kategori', TRUE)),
+            "kategori" => $kategori,
             "dosbing_1" => htmlspecialchars($this->input->post('dosbing_1', TRUE)),
-            "dosbing_2" => htmlspecialchars($this->input->post('dosbing_2', TRUE)),
+            "dosbing_2" => $dosbing2,
             "foto" => 'default.jpg'
         ];
 
         $this->mahasiswa->tambah($data);
 
         $this->session->set_flashdata('flash-sukses', 'Data berhasil ditambahkan');
-        redirect('admin/mahasiswa');
+        $previous_url = $this->session->userdata('previous_url');
+        redirect($previous_url);
     }
 
     public function edit()
     {
+        $semester = htmlspecialchars($this->input->post('semester', TRUE));
+        if ($semester == 4)
+        {
+            $dosbing2 = null;
+            $kategori = null;
+        }
+        else
+        {
+            $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
+            $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
+        }
         $data = [
             "nim" => htmlspecialchars($this->input->post('nim', TRUE)),
             "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
+            "semester" => $semester,
             "judul" => htmlspecialchars($this->input->post('judul', TRUE)),
-            "kategori" => htmlspecialchars($this->input->post('kategori', TRUE)),
+            "kategori" => $kategori,
             "dosbing_1" => htmlspecialchars($this->input->post('dosbing_1', TRUE)),
-            "dosbing_2" => htmlspecialchars($this->input->post('dosbing_2', TRUE))
+            "dosbing_2" => $dosbing2
         ];
 
         $this->mahasiswa->edit($data);
 
         $this->session->set_flashdata('flash-sukses', 'Data berhasil diupdate');
-        redirect('admin/mahasiswa');
+        $previous_url = $this->session->userdata('previous_url');
+        redirect($previous_url);
     }
 
     public function resetPassword($id)

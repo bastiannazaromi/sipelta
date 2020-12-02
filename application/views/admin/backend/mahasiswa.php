@@ -24,7 +24,8 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
-                                    <th>Judul TA</th>
+                                    <th>Semester</th>
+                                    <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Dosbing 1</th>
                                     <th>Dosbing 2</th>
@@ -42,6 +43,7 @@
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
+                                    <td><?= $hasil['semester']; ?></td>
                                     <td><?= $hasil['judul']; ?></td>
                                     <td><?= $hasil['kategori']; ?></td>
                                     <td><?= $hasil['dosbing_1']; ?></td>
@@ -65,6 +67,7 @@
                             </tbody>
                             <tfoot>
                                 <tr class="table table-warning">
+                                    <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
@@ -100,7 +103,7 @@
         <form action="<?= base_url('admin/mahasiswa/tambah'); ?>" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
+                    <h5 class="modal-title">Tambah Mahasiswa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span>
                     </button>
@@ -110,33 +113,41 @@
                         value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
                         <label for="nim">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" required autocomplete="off">
+                        <input type="text" class="form-control" name="nim" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama Mahasiswa</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off">
+                        <input type="text" class="form-control" name="nama" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select class="custom-select semester" name="semester">
+                            <option value="">-- Pilih Semester --</option>
+                            <option value="4">4</option>
+                            <option value="6">6</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="dosbing_1">Dosen Pembimbing 1</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="dosbing_1">
+                        <select class="custom-select" name="dosbing_1">
                             <option value="">-- Pilih Dosen --</option>
                             <?php foreach ($dosen as $ds) : ?>
                             <option value="<?= $ds['nama']; ?>"><?= $ds['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dosbing_2_tambah d-none">
                         <label for="dosbing_2">Dosen Pembimbing 2</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="dosbing_2">
+                        <select class="custom-select" name="dosbing_2">
                             <option value="">-- Pilih Dosen --</option>
                             <?php foreach ($dosen as $ds) : ?>
                             <option value="<?= $ds['nama']; ?>"><?= $ds['nama']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group kategori_tambah d-none">
                         <label for="kategori">Kategori</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="kategori">
+                        <select class="custom-select" name="kategori">
                             <option value="">-- Pilih Kategori --</option>
                             <option value="Hardware">Hardware</option>
                             <option value="Pemrograman">Pemrograman</option>
@@ -144,8 +155,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="judul">Judul TA</label>
-                        <textarea class="form-control" id="judul" name="judul" required autocomplete="off"></textarea>
+                        <label for="judul">Judul</label>
+                        <textarea class="form-control" name="judul" required autocomplete="off"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -165,7 +176,7 @@
         <form action="<?= base_url('admin/mahasiswa/edit'); ?>" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Mahasiswa</h5>
+                    <h5 class="modal-title">Edit Mahasiswa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span>
                     </button>
@@ -176,17 +187,25 @@
                         value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
                         <label for="nim">NIM</label>
-                        <input type="text" class="form-control" id="nim" name="nim" required autocomplete="off"
+                        <input type="text" class="form-control" name="nim" required autocomplete="off"
                             value="<?= $dt['nim']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama Mahasiswa</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off"
+                        <input type="text" class="form-control" name="nama" required autocomplete="off"
                             value="<?= $dt['nama']; ?>">
                     </div>
                     <div class="form-group">
+                        <label for="semester">Semester</label>
+                        <select class="custom-select semester_edit" name="semester">
+                            <option value="">-- Pilih Semester --</option>
+                            <option value="4" <?php if (4 == $dt['semester']) echo 'selected="selected"'; ?>>4</option>
+                            <option value="6" <?php if (6 == $dt['semester']) echo 'selected="selected"'; ?>>6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="dosbing_1">Dosen Pembimbing 1</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="dosbing_1">
+                        <select class="custom-select" name="dosbing_1">
                             <option value="">-- Pilih Dosen --</option>
                             <?php foreach ($dosen as $ds) : ?>
                             <option value="<?= $ds['nama']; ?>"
@@ -195,9 +214,9 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group dosbing_2_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>">
                         <label for="dosbing_2">Dosen Pembimbing 2</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="dosbing_2">
+                        <select class="custom-select" name="dosbing_2">
                             <option value="">-- Pilih Dosen --</option>
                             <?php foreach ($dosen as $ds) : ?>
                             <option value="<?= $ds['nama']; ?>"
@@ -206,9 +225,9 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group kategori_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>">
                         <label for="kategori">Kategori</label>
-                        <select class="custom-select" id="inputGroupSelect02" name="kategori">
+                        <select class="custom-select" name="kategori">
                             <option value="">-- Pilih Kategori --</option>
                             <option value="Hardware"
                                 <?php if ($dt['kategori'] == 'Hardware') echo 'selected="selected"'; ?>>Hardware
@@ -222,8 +241,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="judul">Judul TA</label>
-                        <textarea class="form-control" id="judul" name="judul" required
+                        <label for="judul">Judul</label>
+                        <textarea class="form-control" name="judul" required
                             autocomplete="off"><?= $dt['judul']; ?></textarea>
                     </div>
                 </div>
@@ -266,3 +285,44 @@
         </form>
     </div>
 </div>
+
+<script src="<?= base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+    let semester = $('.semester');
+    let semester_edit = $('.semester_edit');
+    let dosbing_2_edit = $('.dosbing_2_edit');
+    let kategori_edit = $('.kategori_edit');
+
+    $(semester).each(function(i) {
+        $(semester[i]).change(function() {
+            let smstr = $(this).find(':selected').val();
+
+            if (smstr == 6) {
+                $('.dosbing_2_tambah').removeClass('d-none');
+                $('.kategori_tambah').removeClass('d-none');
+            } else {
+                $('.dosbing_2_tambah').addClass('d-none');
+                $('.kategori_tambah').addClass('d-none');
+            }
+        });
+    });
+
+    $(semester_edit).each(function(i) {
+        $(semester_edit[i]).change(function() {
+            let smstr = $(this).find(':selected').val();
+
+            if (smstr == 6) {
+                $('.dosbing_2_edit').removeClass('d-none');
+                $('.kategori_edit').removeClass('d-none');
+            } else {
+                $('.dosbing_2_edit').addClass('d-none');
+                $('.kategori_edit').addClass('d-none');
+            }
+        });
+    });
+
+});
+</script>

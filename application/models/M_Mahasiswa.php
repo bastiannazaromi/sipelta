@@ -4,13 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Mahasiswa extends CI_Model
 {
 
-    public function getAll()
+    public function getAll($semester, $tabel)
     {
-        $this->db->select('*');
-        $this->db->from('tb_mahasiswa');
+        if ($semester)
+        {
+            $this->db->where('semester', $semester);
+        }
+        
         $this->db->order_by('nim');
-
-        return $this->db->get()->result_array();
+        $data = $this->db->get($tabel)->result_array();
+        return (count((array)$data) > 0) ? $data : false;
     }
 
     public function getOne($nim)

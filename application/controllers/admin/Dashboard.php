@@ -30,7 +30,7 @@ class Dashboard extends CI_Controller
         $data['title'] = 'Dashboard Admin';
         $data['page'] = 'admin/backend/dashboard';
 
-        $data['mahasiswa'] = count($this->mahasiswa->getAll());
+        $data['mahasiswa'] = count($this->mahasiswa->getAll('', 'tb_mahasiswa'));
         $data['dosen'] = count($this->dosen->getAll());
         $data['admin'] = count($this->admin->getAll());
         $data['jurnal'] = count($this->jurnal->getAll());
