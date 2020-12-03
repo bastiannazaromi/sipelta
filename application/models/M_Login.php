@@ -14,12 +14,13 @@ class M_Login extends CI_Model
         if (count($data) === 1) {
             if (password_verify($p, $data[0]->password)) {
                 $login        =    array(
-                    'is_logged_in'    =>     true,
-                    'username'            =>    $u,
-                    'id'            =>    $data[0]->id,
-                    'nim'           =>    $data[0]->nim,
-                    'nama'            =>    $data[0]->nama,
-                    'judul'         => $data[0]->judul
+                    'is_logged_in'          => true,
+                    'username'              => $u,
+                    'id'                    => $data[0]->id,
+                    'nim'                   => $data[0]->nim,
+                    'nama'                  => $data[0]->nama,
+                    'judul'                 => $data[0]->judul,
+                    'semester'              => $data[0]->semester
                 );
                 if ($login) {
                     $this->session->set_userdata('user_login', $login);

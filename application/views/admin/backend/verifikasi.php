@@ -19,7 +19,7 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
-                                    <th>Judul TA</th>
+                                    <th>Judul</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>

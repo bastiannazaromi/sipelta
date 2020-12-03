@@ -13,6 +13,13 @@ class Verifikasi extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
+        $this->u2		= $this->uri->segment(2);
+        $this->u3		= $this->uri->segment(3);
+        $this->u4		= $this->uri->segment(4);
+        $this->u5		= $this->uri->segment(5);
+        $this->u6		= $this->uri->segment(6);
+        $this->u7		= $this->uri->segment(7);
+
         $this->load->model('M_Mahasiswa', 'mahasiswa');
         $this->load->model('M_Jurnal', 'jurnal');
         $this->load->model('M_Laporan_pdf', 'laporan_pdf');
@@ -20,6 +27,7 @@ class Verifikasi extends CI_Controller
         $this->load->model('M_Pengesahan', 'pengesahan');
         $this->load->model('M_Persetujuan', 'persetujuan');
         $this->load->model('M_Brosur', 'brosur');
+        $this->load->model('M_Mahasiswa', 'mahasiswa');
 
         $this->load->model('M_Admin', 'admin');
     }
@@ -29,16 +37,35 @@ class Verifikasi extends CI_Controller
         $data['title'] = 'Verifikasi File';
         $data['page'] = 'admin/backend/verifikasi';
 
-        $data['mahasiswa'] = $this->mahasiswa->getAll();
+        $data['mahasiswa'] = $this->mahasiswa->getAll(dekrip($this->u4), 'tb_mahasiswa');
 
         $this->load->view('admin/backend/index', $data);
     }
 
     public function cek_file($nim)
     {
-        $data['title'] = 'Verifikasi File';
-        $data['page'] = 'admin/backend/cek_file';
+        $this->data['title'] = 'Verifikasi File';
+        $this->data['page'] = 'admin/backend/cek_file';
 
+        $this->data['nim'] = $nim;
+
+        $mhs = $this->mahasiswa->getOne($nim);
+
+        if ($mhs[0]['semester'] == 6)
+        {
+            $this->_cekfileTA($nim);
+        }
+
+        else
+        {
+            $this->_cekfileKP($nim);
+        }
+
+        $this->load->view('admin/backend/index', $this->data);
+    }
+
+    private function _cekfileTA($nim)
+    {
         $jurnal = $this->jurnal->getOne($nim);
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $lembar_produk = $this->lembar_produk->getOne($nim);
@@ -89,7 +116,7 @@ class Verifikasi extends CI_Controller
             $s_brosur = null;
         }
 
-        $data['berkas'] = [
+        $this->data['berkas'] = [
             "0" => [
                 "berkas" => 'jurnal',
                 "judul"  => $j_jurnal,
@@ -121,10 +148,40 @@ class Verifikasi extends CI_Controller
                 "status" => $s_brosur
             ]
         ];
+    }
 
-        $data['nim'] = $nim;
-
-        $this->load->view('admin/backend/index', $data);
+    private function _cekfileKP($nim)
+    {
+        $laporan_pdf = $this->laporan_pdf->getOne($nim);
+        $pengesahan = $this->pengesahan->getOne($nim);
+        
+        if ($laporan_pdf) {
+            $j_lap_pdf = $laporan_pdf[0]['nama_laporan_pdf'];
+            $s_lap_pdf = $laporan_pdf[0]['status'];
+        } else {
+            $j_lap_pdf = null;
+            $s_lap_pdf = null;
+        }
+        if ($pengesahan) {
+            $j_pengesahan = $pengesahan[0]['nama_file'];
+            $s_pengesahan = $pengesahan[0]['status'];
+        } else {
+            $j_pengesahan = null;
+            $s_pengesahan = null;
+        }
+        
+        $this->data['berkas'] = [
+            "0" => [
+                "berkas" => 'laporan_pdf',
+                "judul"  => $j_lap_pdf,
+                "status" => $s_lap_pdf
+            ],
+            "1" => [
+                "berkas" => 'pengesahan',
+                "judul"  => $j_pengesahan,
+                "status" => $s_pengesahan
+            ]
+        ];
     }
 
     public function update()
@@ -137,7 +194,15 @@ class Verifikasi extends CI_Controller
             'status' => $status
         ];
 
+        $update = [
+            'nim' => $nim,
+            'tabel' => $tabel,
+            'status' => $status
+        ];
+
         $this->db->where('nim', $nim);
-        $this->db->update($tabel, $data);
+        $update = $this->db->update($tabel, $data);
+
+        echo json_encode($update);
     }
 }

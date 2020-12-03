@@ -183,6 +183,7 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
             success: function() {
                 document.location.href =

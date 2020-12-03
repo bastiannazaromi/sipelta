@@ -112,14 +112,16 @@ class Mahasiswa extends CI_Controller
         $this->mahasiswa->resetPassword($data, $id);
 
         $this->session->set_flashdata('flash-sukses', 'Password berhasil direset');
-        redirect('admin/mahasiswa');
+        $previous_url = $this->session->userdata('previous_url');
+        redirect($previous_url);
     }
 
     public function hapus($id)
     {
         $this->mahasiswa->hapus($id);
         $this->session->set_flashdata('flash-sukses', 'Data berhasil dihapus');
-        redirect('admin/mahasiswa');
+        $previous_url = $this->session->userdata('previous_url');
+        redirect($previous_url);
     }
 
     public function import()
@@ -152,26 +154,44 @@ class Mahasiswa extends CI_Controller
             $numrow = 1;
             foreach ($sheet as $row) {
                 if ($numrow > 1) {
-                    array_push($data, array(
-                        'nim' => htmlspecialchars(str_replace('\'', '', $row['B'])),
-                        'password' => password_hash(str_replace('\'', '',  $row['B']), PASSWORD_DEFAULT),
-                        'nama' => htmlspecialchars($row['C']),
-                        'judul' => htmlspecialchars($row['F']),
-                        'dosbing_1' => htmlspecialchars($row['D']),
-                        'dosbing_2' => htmlspecialchars($row['E']),
-                        'foto' => 'default.jpg'
-                    ));
+                    
+                    $cek = $this->db->get_where('tb_mahasiswa', ['nim' => str_replace('\'', '', $row['B'])])->result_array();
+
+                    if ($row['A'] != null) {
+                        if (!$cek) {
+                            array_push($data, array(
+                                'nim' => htmlspecialchars(str_replace('\'', '', $row['B'])),
+                                'password' => password_hash(str_replace('\'', '', $row['B']), PASSWORD_DEFAULT),
+                                'nama' => htmlspecialchars($row['C']),
+                                'semester' => htmlspecialchars(str_replace('\'', '', $row['D'])),
+                                'judul' => htmlspecialchars($row['G']),
+                                'kategori' => htmlspecialchars($row['H']),
+                                'dosbing_1' => htmlspecialchars($row['E']),
+                                'dosbing_2' => htmlspecialchars($row['F']),
+                                'foto' => 'default.jpg'
+                            ));
+                        }
+                    }
                 }
                 $numrow++;
             }
-            $this->db->insert_batch('tb_mahasiswa', $data);
+
+            if (count($data) != 0) {
+                $this->db->insert_batch('tb_mahasiswa', $data);
+
+                $this->session->set_flashdata('flash-sukses', 'Data berhasil di import');
+            }
+            else
+            {
+                $this->session->set_flashdata('flash-error', 'Gagal import ! Data kosong / sudah ada dalam database');
+            }
+
             //delete file from server
             unlink(realpath('excel/' . $data_upload['file_name']));
 
-            //upload success
-            $this->session->set_flashdata('flash-sukses', 'Data berhasil di import');
             //redirect halaman
-            redirect('admin/mahasiswa');
+            $previous_url = $this->session->userdata('previous_url');
+            redirect($previous_url);
         }
     }
 
@@ -180,12 +200,14 @@ class Mahasiswa extends CI_Controller
         $id = $this->input->post('id');
         if ($id == NULL) {
             $this->session->set_flashdata('flash-error', 'Pilih data yang akan dihapus !');
-            redirect('admin/mahasiswa');
+            $previous_url = $this->session->userdata('previous_url');
+            redirect($previous_url);
         } else {
             $this->mahasiswa->multiple_delete($id);
 
             $this->session->set_flashdata('flash-sukses', 'Data berhasil di hapus');
-            redirect('admin/mahasiswa');
+            $previous_url = $this->session->userdata('previous_url');
+            redirect($previous_url);
         }
     }
 }

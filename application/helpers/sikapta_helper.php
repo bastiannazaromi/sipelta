@@ -61,22 +61,42 @@ function status_file($nim)
 {
     $CI = &get_instance();
 
-    $jurnal = $CI->jurnal->getOne($nim);
-    $laporan_pdf = $CI->laporan_pdf->getOne($nim);
-    $lembar_produk = $CI->lembar_produk->getOne($nim);
-    $pengesahan = $CI->pengesahan->getOne($nim);
-    $persetujuan = $CI->persetujuan->getOne($nim);
-    $brosur = $CI->brosur->getOne($nim);
-
-    if ($jurnal != null && $laporan_pdf != null && $lembar_produk != null && $pengesahan != null && $persetujuan != null && $brosur != null) {
-
-        if ($jurnal[0]['status'] == 'ACC' && $laporan_pdf[0]['status'] == 'ACC' && $lembar_produk[0]['status'] == 'ACC' && $pengesahan[0]['status'] == 'ACC' && $persetujuan[0]['status'] == 'ACC' && $brosur[0]['status'] == 'ACC') {
-            return 'Terverifikasi';
+    if ($CI->session->userdata('semester') == 6)
+    {
+        $jurnal = $CI->jurnal->getOne($nim);
+        $laporan_pdf = $CI->laporan_pdf->getOne($nim);
+        $lembar_produk = $CI->lembar_produk->getOne($nim);
+        $pengesahan = $CI->pengesahan->getOne($nim);
+        $persetujuan = $CI->persetujuan->getOne($nim);
+        $brosur = $CI->brosur->getOne($nim);
+    
+        if ($jurnal != null && $laporan_pdf != null && $lembar_produk != null && $pengesahan != null && $persetujuan != null && $brosur != null) {
+    
+            if ($jurnal[0]['status'] == 'ACC' && $laporan_pdf[0]['status'] == 'ACC' && $lembar_produk[0]['status'] == 'ACC' && $pengesahan[0]['status'] == 'ACC' && $persetujuan[0]['status'] == 'ACC' && $brosur[0]['status'] == 'ACC') {
+                return 'Terverifikasi';
+            } else {
+                return 'Menunggu verifikasi';
+            }
         } else {
-            return 'Menunggu verifikasi';
+            return 'File belum lengkap';
         }
-    } else {
-        return 'File belum lengkap';
+    }
+    else
+    {
+        $laporan_pdf = $CI->laporan_pdf->getOne($nim);
+        $pengesahan = $CI->pengesahan->getOne($nim);
+        $brosur = $CI->brosur->getOne($nim);
+    
+        if ($laporan_pdf != null && $pengesahan != null) {
+    
+            if ($laporan_pdf[0]['status'] == 'ACC' && $pengesahan[0]['status'] == 'ACC' ) {
+                return 'Terverifikasi';
+            } else {
+                return 'Menunggu verifikasi';
+            }
+        } else {
+            return 'File belum lengkap';
+        }
     }
 }
 

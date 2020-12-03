@@ -157,7 +157,7 @@
                             <a href="#" class="nav-link hr">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>
-                                    File Upload
+                                    File Upload TA
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -170,7 +170,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/laporan_pdf'); ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/laporan_pdf/ta'); ?>" class="nav-link">
                                         <i class="fas fa-book nav-icon"></i>
                                         <p>Laporan TA PDF</p>
                                     </a>
@@ -182,7 +182,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/pengesahan'); ?>" class="nav-link">
+                                    <a href="<?= base_url('admin/pengesahan/ta'); ?>" class="nav-link">
                                         <i class="fas fa-book nav-icon"></i>
                                         <p>Lembar Pengesahan</p>
                                     </a>
@@ -198,18 +198,56 @@
                                         <i class="fas fa-book nav-icon"></i>
                                         <p>Brosur</p>
                                     </a>
-
-                                    <hr class="bg-light">
                                 </li>
                             </ul>
 
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <a href="<?= base_url('admin/verifikasi'); ?>" class="nav-link hr">
+                            <hr class="bg-light">
+                            <a href="#" class="nav-link hr">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>
+                                    File Upload KP
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/laporan_pdf/kp'); ?>" class="nav-link">
+                                        <i class="fas fa-book nav-icon"></i>
+                                        <p>Laporan KP PDF</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/pengesahan/kp'); ?>" class="nav-link">
+                                        <i class="fas fa-book nav-icon"></i>
+                                        <p>Lembar Pengesahan</p>
+                                    </a>
+
+                                </li>
+                            </ul>
+
+                            <hr class="bg-light">
+
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="<?= base_url('admin/verifikasi/kategori/') . enkrip(6) ; ?>" class="nav-link hr">
                                 <i class="nav-icon fas fa-check"></i>
                                 <p>
-                                    Verifikasi File
+                                    Verifikasi File TA
+                                </p>
+                            </a>
+
+
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="<?= base_url('admin/verifikasi/kategori/') . enkrip(4) ; ?>" class="nav-link hr">
+                                <i class="nav-icon fas fa-check"></i>
+                                <p>
+                                    Verifikasi File KP
                                 </p>
                             </a>
 

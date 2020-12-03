@@ -91,11 +91,17 @@ class Dosen extends CI_Controller
             $numrow = 1;
             foreach ($sheet as $row) {
                 if ($numrow > 1) {
-                    array_push($data, array(
-                        'nama' => htmlspecialchars($row['B']),
-                        'nipy' => htmlspecialchars(str_replace('\'', '', $row['C'])),
-                        'nidn' => htmlspecialchars(str_replace('\'', '', $row['D'])),
-                    ));
+                    $cek = $this->db->get_where('tb_dosen', ['nama' => str_replace('\'', '', $row['B'])])->result_array();
+
+                    if ($row['A'] != null) {
+                        if (!$cek) {
+                            array_push($data, array(
+                                'nama' => htmlspecialchars($row['B']),
+                                'nipy' => htmlspecialchars(str_replace('\'', '', $row['C'])),
+                                'nidn' => htmlspecialchars(str_replace('\'', '', $row['D'])),
+                            ));
+                        }
+                    }
                 }
                 $numrow++;
             }

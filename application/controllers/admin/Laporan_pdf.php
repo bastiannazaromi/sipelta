@@ -13,6 +13,13 @@ class Laporan_pdf extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
+        $this->u2		= $this->uri->segment(2);
+        $this->u3		= $this->uri->segment(3);
+        $this->u4		= $this->uri->segment(4);
+        $this->u5		= $this->uri->segment(5);
+        $this->u6		= $this->uri->segment(6);
+        $this->u7		= $this->uri->segment(7);
+
         $this->load->model('M_Laporan_pdf', 'laporan_pdf');
     }
 
@@ -21,7 +28,7 @@ class Laporan_pdf extends CI_Controller
         $data['title'] = 'List Laporan PDF';
         $data['page'] = 'admin/backend/laporan_pdf';
 
-        $data['laporan_pdf'] = $this->laporan_pdf->getAll();
+        $data['laporan_pdf'] = $this->laporan_pdf->getAll($this->u3);
 
         $this->load->view('admin/backend/index', $data);
     }

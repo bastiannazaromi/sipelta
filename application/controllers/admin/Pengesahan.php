@@ -13,6 +13,13 @@ class Pengesahan extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
+        $this->u2		= $this->uri->segment(2);
+        $this->u3		= $this->uri->segment(3);
+        $this->u4		= $this->uri->segment(4);
+        $this->u5		= $this->uri->segment(5);
+        $this->u6		= $this->uri->segment(6);
+        $this->u7		= $this->uri->segment(7);
+
         $this->load->model('M_Pengesahan', 'pengesahan');
     }
 
@@ -21,7 +28,7 @@ class Pengesahan extends CI_Controller
         $data['title'] = 'List Lembar Pengesahan';
         $data['page'] = 'admin/backend/pengesahan';
 
-        $data['pengesahan'] = $this->pengesahan->getAll();
+        $data['pengesahan'] = $this->pengesahan->getAll($this->u3);
 
         $this->load->view('admin/backend/index', $data);
     }

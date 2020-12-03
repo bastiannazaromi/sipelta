@@ -4,11 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Laporan_pdf extends CI_Model
 {
 
-    public function getAll()
+    public function getAll($kategori)
     {
         $this->db->select('tb_laporan_pdf.id, tb_laporan_pdf.nim, tb_laporan_pdf.nama_laporan_pdf, tb_laporan_pdf.status, tb_laporan_pdf.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_laporan_pdf');
         $this->db->join('tb_mahasiswa', 'tb_laporan_pdf.nim = tb_mahasiswa.nim', 'left');
+
+        if ($kategori)
+        {
+            $this->db->where('tb_laporan_pdf.kategori', $kategori);
+        }
+
         $this->db->order_by('status', 'desc');
 
         return $this->db->get()->result_array();

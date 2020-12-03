@@ -34,9 +34,9 @@ class Dashboard extends CI_Controller
         $data['dosen'] = count($this->dosen->getAll());
         $data['admin'] = count($this->admin->getAll());
         $data['jurnal'] = count($this->jurnal->getAll());
-        $data['laporan_pdf'] = count($this->laporan_pdf->getAll());
+        $data['laporan_pdf'] = count($this->laporan_pdf->getAll(''));
         $data['lembar_produk'] = count($this->lembar_produk->getAll());
-        $data['pengesahan'] = count($this->pengesahan->getAll());
+        $data['pengesahan'] = count($this->pengesahan->getAll(''));
         $data['persetujuan'] = count($this->persetujuan->getAll());
         $data['brosur'] = count($this->brosur->getAll());
 
