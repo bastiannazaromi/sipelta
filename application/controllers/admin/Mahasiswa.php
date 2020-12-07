@@ -42,24 +42,27 @@ class Mahasiswa extends CI_Controller
         $semester = htmlspecialchars($this->input->post('semester', TRUE));
         if ($semester == 4)
         {
-            $dosbing2 = null;
-            $kategori = null;
+            $dosbing2   = null;
+            $kategori   = null;
+            $tempat     = htmlspecialchars($this->input->post('tempat', TRUE));
         }
         else
         {
             $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
             $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
+            $tempat   = null;
         }
         $data = [
-            "nim" => htmlspecialchars($this->input->post('nim', TRUE)),
-            "password" => password_hash($this->input->post('nim', TRUE), PASSWORD_DEFAULT),
-            "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
-            "semester" => $semester,
-            "judul" => htmlspecialchars($this->input->post('judul', TRUE)),
-            "kategori" => $kategori,
+            "nim"       => htmlspecialchars($this->input->post('nim', TRUE)),
+            "password"  => password_hash($this->input->post('nim', TRUE), PASSWORD_DEFAULT),
+            "nama"      => htmlspecialchars($this->input->post('nama', TRUE)),
+            "semester"  => $semester,
+            "judul"     => htmlspecialchars($this->input->post('judul', TRUE)),
+            "kategori"  => $kategori,
             "dosbing_1" => htmlspecialchars($this->input->post('dosbing_1', TRUE)),
             "dosbing_2" => $dosbing2,
-            "foto" => 'default.jpg'
+            "tempat"    => $tempat,
+            "foto"      => 'default.jpg'
         ];
 
         $this->mahasiswa->tambah($data);
@@ -76,20 +79,23 @@ class Mahasiswa extends CI_Controller
         {
             $dosbing2 = null;
             $kategori = null;
+            $tempat   = htmlspecialchars($this->input->post('tempat', TRUE));
         }
         else
         {
             $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
             $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
+            $tempat   = null;
         }
         $data = [
-            "nim" => htmlspecialchars($this->input->post('nim', TRUE)),
-            "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
-            "semester" => $semester,
-            "judul" => htmlspecialchars($this->input->post('judul', TRUE)),
-            "kategori" => $kategori,
+            "nim"       => htmlspecialchars($this->input->post('nim', TRUE)),
+            "nama"      => htmlspecialchars($this->input->post('nama', TRUE)),
+            "semester"  => $semester,
+            "judul"     => htmlspecialchars($this->input->post('judul', TRUE)),
+            "kategori"  => $kategori,
             "dosbing_1" => htmlspecialchars($this->input->post('dosbing_1', TRUE)),
-            "dosbing_2" => $dosbing2
+            "dosbing_2" => $dosbing2,
+            "tempat"    => $tempat
         ];
 
         $this->mahasiswa->edit($data);
@@ -168,6 +174,7 @@ class Mahasiswa extends CI_Controller
                                 'kategori' => htmlspecialchars($row['H']),
                                 'dosbing_1' => htmlspecialchars($row['E']),
                                 'dosbing_2' => htmlspecialchars($row['F']),
+                                'tempat' => htmlspecialchars($row['I']),
                                 'foto' => 'default.jpg'
                             ));
                         }

@@ -26,9 +26,13 @@
                                     <th>Nama</th>
                                     <th>Semester</th>
                                     <th>Judul</th>
-                                    <th>Kategori</th>
                                     <th>Dosbing 1</th>
+                                    <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>Dosbing 2</th>
+                                    <th>Kategori</th>
+                                    <?php elseif (dekrip($this->u4) == 4) : ?>
+                                    <th>Tempat KP</th>
+                                    <?php endif ; ?>
                                     <th>Password</th>
                                     <th>Action</th>
                                     <th>
@@ -45,9 +49,14 @@
                                     <td><?= $hasil['nama']; ?></td>
                                     <td><?= $hasil['semester']; ?></td>
                                     <td><?= $hasil['judul']; ?></td>
-                                    <td><?= $hasil['kategori']; ?></td>
                                     <td><?= $hasil['dosbing_1']; ?></td>
+                                    <?php if (dekrip($this->u4) == 6) : ?>
                                     <td><?= $hasil['dosbing_2']; ?></td>
+                                    <td><?= $hasil['kategori']; ?></td>
+                                    <?php elseif (dekrip($this->u4) == 4) : ?>
+                                    <td><?= $hasil['tempat']; ?></td>
+                                    <?php endif ; ?>
+
                                     <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= $hasil['id']; ?>"
                                             class="badge badge-success delete-people"><i class="fa fa-edit"></i>
                                             Reset</a>
@@ -72,7 +81,9 @@
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
+                                    <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>-</th>
+                                    <?php endif ; ?>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
@@ -157,6 +168,10 @@
                     <div class="form-group">
                         <label for="judul">Judul</label>
                         <textarea class="form-control" name="judul" required autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group tempat_tambah d-none">
+                        <label for="tempat">Tempat KP</label>
+                        <textarea class="form-control" name="tempat" required autocomplete="off"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -245,6 +260,11 @@
                         <textarea class="form-control" name="judul" required
                             autocomplete="off"><?= $dt['judul']; ?></textarea>
                     </div>
+                    <div class="form-group tempat_edit <?= ($dt['semester'] == 6) ? 'd-none' : '' ; ?>">
+                        <label for="tempat">Tempat KP</label>
+                        <textarea class="form-control" name="tempat" required
+                            autocomplete="off"><?= $dt['tempat']; ?></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -303,9 +323,11 @@ $(document).ready(function() {
             if (smstr == 6) {
                 $('.dosbing_2_tambah').removeClass('d-none');
                 $('.kategori_tambah').removeClass('d-none');
+                $('.tempat_tambah').addClass('d-none');
             } else {
                 $('.dosbing_2_tambah').addClass('d-none');
                 $('.kategori_tambah').addClass('d-none');
+                $('.tempat_tambah').removeClass('d-none');
             }
         });
     });
@@ -317,9 +339,11 @@ $(document).ready(function() {
             if (smstr == 6) {
                 $('.dosbing_2_edit').removeClass('d-none');
                 $('.kategori_edit').removeClass('d-none');
+                $('.tempat_edit').addClass('d-none');
             } else {
                 $('.dosbing_2_edit').addClass('d-none');
                 $('.kategori_edit').addClass('d-none');
+                $('.tempat_edit').removeClass('d-none');
             }
         });
     });
