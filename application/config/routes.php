@@ -57,8 +57,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = 'admin/auth';
 $route['user'] = 'user/beranda';
 
-$route['admin/mahasiswa/semester/(:any)']        = 'admin/mahasiswa/index/$1';
+$route['admin/mahasiswa/semester/(:any)']       = 'admin/mahasiswa/index/$1';
+$route['admin/laporan_pdf/(:any)']              = 'admin/laporan_pdf/index/$1';
+$route['admin/pengesahan/(:any)']               = 'admin/pengesahan/index/$1';
+$route['admin/verifikasi/kategori/(:any)']      = 'admin/verifikasi/index/$1';
 
-$route['admin/laporan_pdf/(:any)']               = 'admin/laporan_pdf/index/$1';
-$route['admin/pengesahan/(:any)']                = 'admin/pengesahan/index/$1';
-$route['admin/verifikasi/kategori/(:any)']       = 'admin/verifikasi/index/$1';
+$route['dosen/login']                           = 'dosen_login';

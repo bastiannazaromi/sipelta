@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Auth extends CI_Model
 {
-
 	function cek_login($u, $p)
 	{
 
