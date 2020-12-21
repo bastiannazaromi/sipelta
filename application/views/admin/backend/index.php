@@ -19,6 +19,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/datatable/dataTables.bootstrap4.min.css') ?>" type="text/css">
+    <link rel="stylesheet" href="<?= base_url('assets/datatable/buttons.bootstrap4.min.css') ?>" type="text/css">
 
     <link href="<?= base_url() ; ?>assets/toastr/toastr.min.css" rel="stylesheet">
 
@@ -262,6 +263,25 @@
                         </li>
 
                         <li class="nav-item has-treeview">
+                            <a href="<?= base_url('admin/rekap/') . enkrip(6) ; ?>" class="nav-link hr">
+                                <i class="nav-icon fas fa-window-restore"></i>
+                                <p>
+                                    Rekap TA
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="<?= base_url('admin/rekap/') . enkrip(4) ; ?>" class="nav-link hr">
+                                <i class="nav-icon fas fa-window-restore"></i>
+                                <p>
+                                    Rekap KP
+                                </p>
+                            </a>
+
+                            <hr class="bg-light">
+                        </li>
+
+                        <li class="nav-item has-treeview">
                             <a href="<?= base_url('admin/galery'); ?>" class="nav-link hr">
                                 <i class="nav-icon fas fa-image"></i>
                                 <p>
@@ -319,7 +339,7 @@
         <!-- /.content-wrapper -->
 
         <footer class="main-footer">
-            <strong>&copy; <a href="http://d3komputerphb.id" target='_blank'>Beranda SIKAPTA</a></strong>
+            <strong>&copy; <a href="https://sikapta.d3komputerphb.id" target='_blank'>Beranda SIKAPTA</a></strong>
         </footer>
 
         <!-- Control Sidebar -->
@@ -346,6 +366,15 @@
 
     <script src="<?php echo base_url(); ?>assets/datatable/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/datatable/dataTables.bootstrap4.min.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/datatable/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/buttons.bootstrap4.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/jszip.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/pdfmake.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/vfs_fonts.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/buttons.print.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datatable/buttons.colVis.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
     <!-- panggil adapter jquery ckeditor -->
@@ -382,6 +411,36 @@
 <script>
 $(document).ready(function() {
     $('#example').DataTable();
+
+    var table = $('#examples').DataTable({
+        lengthChange: false,
+        buttons: [{
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ],
+        columnDefs: [{
+            visible: false
+        }]
+    });
+
+    table.buttons().container()
+        .appendTo('#examples_wrapper .col-md-6:eq(0)');
 });
 
 $(document).ready(function() {

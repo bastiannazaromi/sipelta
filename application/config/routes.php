@@ -63,4 +63,7 @@ $route['admin/laporan_pdf/(:any)']                      = 'admin/laporan_pdf/ind
 $route['admin/pengesahan/(:any)']                       = 'admin/pengesahan/index/$1';
 $route['admin/verifikasi/kategori/(:any)']              = 'admin/verifikasi/index/$1';
 
+$route['admin/rekap/(:any)']                            = 'admin/rekap/index';
+$route['admin/rekap/(:any)/(:any)']                     = 'admin/rekap/index';
+
 $route['dosen/login']                                   = 'dosen_login';
