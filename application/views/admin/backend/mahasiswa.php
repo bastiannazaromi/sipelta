@@ -1,21 +1,35 @@
 <section class="content">
 
     <div class="row">
-        <div class="col-xl-12 col-md-12 mb-4">
+        <div class="col-xl-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-3 mb-1 float-sm-right">
+                    <div class="form-group">
+                        <select class="custom-select" id="by_tahun" name="by_tahun">
+                            <option value="">-- Pilih Tahun --</option>
+                            <?php foreach ($tahun as $hasil) : ?>
+                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
+                            <?php endforeach ; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="col-lg-12 col-12 text-right">
+                    <div class="col-lg-12 col-12 mb-3 text-right">
                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalAdd"><i
                                 class="fa fa-plus"></i> Mahasiswa</button>
                         <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
                             data-target="#modalImport"><i class="fa fa-plus"></i> Excel</button>
                         <button type="button" class="btn btn-sm btn-warning"
-                            onclick="window.location='<?= base_url('excel/Format_excel_mahasiswa.xlsx'); ?>'"><i
+                            onclick="window.location='<?= base_url('excel/Format_excel_mahasiswa_kp.xlsx'); ?>'"><i
                                 class="fa fa-download"></i>
-                            Format</button>
+                            Format KP</button>
+                        <button type="button" class="btn btn-sm btn-warning"
+                            onclick="window.location='<?= base_url('excel/Format_excel_mahasiswa_ta.xlsx'); ?>'"><i
+                                class="fa fa-download"></i>
+                            Format TA</button>
                     </div>
-                    <br>
-                    <br>
                     <div class="table-responsive">
                         <?php echo form_open('admin/mahasiswa/multiple_delete'); ?>
                         <table id="example" class="table table-bordered table-hover">
@@ -25,14 +39,18 @@
                                     <th>NIM</th>
                                     <th>Nama</th>
                                     <th>Semester</th>
+                                    <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>Judul</th>
+                                    <?php endif ; ?>
                                     <th>Dosbing 1</th>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>Dosbing 2</th>
                                     <th>Kategori</th>
                                     <?php elseif (dekrip($this->u4) == 4) : ?>
-                                    <th>Tempat KP</th>
+                                    <th>Nama Instansi</th>
+                                    <th>Alamat Instansi</th>
                                     <?php endif ; ?>
+                                    <th>Tahun Akademik</th>
                                     <th>Password</th>
                                     <th>Action</th>
                                     <th>
@@ -48,14 +66,18 @@
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
                                     <td><?= $hasil['semester']; ?></td>
+                                    <?php if (dekrip($this->u4) == 6) : ?>
                                     <td><?= $hasil['judul']; ?></td>
+                                    <?php endif ; ?>
                                     <td><?= $hasil['dosbing_1']; ?></td>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <td><?= $hasil['dosbing_2']; ?></td>
                                     <td><?= $hasil['kategori']; ?></td>
                                     <?php elseif (dekrip($this->u4) == 4) : ?>
-                                    <td><?= $hasil['tempat']; ?></td>
+                                    <td><?= $hasil['nama_instansi']; ?></td>
+                                    <td><?= $hasil['alamat']; ?></td>
                                     <?php endif ; ?>
+                                    <td><?= $hasil['tahun']; ?></td>
 
                                     <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= $hasil['id']; ?>"
                                             class="badge badge-success delete-people"><i class="fa fa-edit"></i>
@@ -80,10 +102,13 @@
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
-                                    <th>-</th>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>-</th>
+                                    <th>-</th>
+                                    <?php else : ?>
+                                    <th>-</th>
                                     <?php endif ; ?>
+                                    <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
@@ -165,13 +190,17 @@
                             <option value="Jaringan">Jaringan</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group judul_tambah d-none">
                         <label for="judul">Judul</label>
-                        <textarea class="form-control" name="judul" required autocomplete="off"></textarea>
+                        <textarea class="form-control" name="judul" autocomplete="off"></textarea>
                     </div>
                     <div class="form-group tempat_tambah d-none">
-                        <label for="tempat">Tempat KP</label>
-                        <textarea class="form-control" name="tempat" required autocomplete="off"></textarea>
+                        <label for="tempat">Nama Instansi</label>
+                        <textarea class="form-control" name="nama_instansi" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group alamat_tambah d-none">
+                        <label for="tempat">Alamat Instansi</label>
+                        <textarea class="form-control" name="alamat" autocomplete="off"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -255,15 +284,18 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="judul">Judul</label>
-                        <textarea class="form-control" name="judul" required
-                            autocomplete="off"><?= $dt['judul']; ?></textarea>
+                    <div class="form-group judul_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>"">
+                        <label for=" judul">Judul</label>
+                        <textarea class="form-control" name="judul" autocomplete="off"><?= $dt['judul']; ?></textarea>
                     </div>
                     <div class="form-group tempat_edit <?= ($dt['semester'] == 6) ? 'd-none' : '' ; ?>">
-                        <label for="tempat">Tempat KP</label>
-                        <textarea class="form-control" name="tempat" required
-                            autocomplete="off"><?= $dt['tempat']; ?></textarea>
+                        <label for="tempat">Nama Instansi</label>
+                        <textarea class="form-control" name="nama_instansi"
+                            autocomplete="off"><?= $dt['nama_instansi']; ?></textarea>
+                    </div>
+                    <div class="form-group alamat_edit <?= ($dt['semester'] == 6) ? 'd-none' : '' ; ?>">
+                        <label for="tempat">Alamat Instansi</label>
+                        <textarea class="form-control" name="alamat" autocomplete="off"><?= $dt['alamat']; ?></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -288,13 +320,21 @@
                             aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
                     <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
                         value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
+                        <label for="ktgr">Kategori</label>
+                        <select class="custom-select" name="ktgr">
+                            <option value="">-- Pilih Kategori --</option>
+                            <option value="KP">KP</option>
+                            <option value="TA">TA</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="nim">Upload File</label>
-                        <input type="file" class="form-control" name="fileExcel" required autocomplete="off">
+                        <input type="file" class="form-control" accept=".xlsx" name="fileExcel" required
+                            autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -323,11 +363,15 @@ $(document).ready(function() {
             if (smstr == 6) {
                 $('.dosbing_2_tambah').removeClass('d-none');
                 $('.kategori_tambah').removeClass('d-none');
+                $('.judul_tambah').removeClass('d-none');
                 $('.tempat_tambah').addClass('d-none');
+                $('.alamat_tambah').addClass('d-none');
             } else {
                 $('.dosbing_2_tambah').addClass('d-none');
                 $('.kategori_tambah').addClass('d-none');
+                $('.judul_tambah').addClass('d-none');
                 $('.tempat_tambah').removeClass('d-none');
+                $('.alamat_tambah').removeClass('d-none');
             }
         });
     });
@@ -339,13 +383,23 @@ $(document).ready(function() {
             if (smstr == 6) {
                 $('.dosbing_2_edit').removeClass('d-none');
                 $('.kategori_edit').removeClass('d-none');
+                $('.judul_edit').removeClass('d-none');
                 $('.tempat_edit').addClass('d-none');
+                $('.alamat_edit').addClass('d-none');
             } else {
                 $('.dosbing_2_edit').addClass('d-none');
                 $('.kategori_edit').addClass('d-none');
+                $('.judul_edit').addClass('d-none');
                 $('.tempat_edit').removeClass('d-none');
+                $('.alamat_edit').removeClass('d-none');
             }
         });
+    });
+
+    $('#by_tahun').change(function() {
+        let tahun = $(this).find(':selected').val();
+        document.location.href = '<?= base_url('admin/mahasiswa/semester/') . $semester . "/" ; ?>' +
+            tahun;
     });
 
 });

@@ -19,6 +19,9 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url('assets/datatable/dataTables.bootstrap4.min.css') ?>" type="text/css">
+
+    <link href="<?= base_url() ; ?>assets/toastr/toastr.min.css" rel="stylesheet">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -27,6 +30,9 @@
 
         <div class="flash-sukses" data-flashdata="<?= $this->session->flashdata('flash-sukses'); ?>"></div>
         <div class="flash-error" data-flashdata="<?= $this->session->flashdata('flash-error'); ?>"></div>
+
+        <div class="toastr-sukses" data-flashdata="<?= $this->session->flashdata('toastr-sukses'); ?>"></div>
+        <div class="toastr-error" data-flashdata="<?= $this->session->flashdata('toastr-error'); ?>"></div>
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -332,6 +338,8 @@
     <script src="<?= base_url(); ?>assets/admin/dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?= base_url(); ?>assets/admin/dist/js/demo.js"></script>
+
+    <script src="<?= base_url() ; ?>assets/toastr/toastr.min.js"></script>
 
     <script src="<?= base_url('assets/sweetalert/sweetalert2.js'); ?> "></script>
     <script src="<?= base_url('assets/sweetalert/new_script.js'); ?> "></script>
