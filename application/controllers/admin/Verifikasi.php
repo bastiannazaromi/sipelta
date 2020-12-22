@@ -28,7 +28,7 @@ class Verifikasi extends CI_Controller
         $this->load->model('M_Persetujuan', 'persetujuan');
         $this->load->model('M_Brosur', 'brosur');
         $this->load->model('M_Mahasiswa', 'mahasiswa');
-        $this->load->model('M_verifikasi', 'verifikasi');
+        $this->load->model('M_Verifikasi', 'verifikasi');
 
         $this->load->model('M_Admin', 'admin');
     }
