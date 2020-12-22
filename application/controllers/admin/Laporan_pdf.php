@@ -25,10 +25,21 @@ class Laporan_pdf extends CI_Controller
 
     public function index()
     {
-        $data['title'] = 'List Laporan PDF';
-        $data['page'] = 'admin/backend/laporan_pdf';
+        $data['title']      = 'List Laporan PDF';
+        $data['page']       = 'admin/backend/laporan_pdf';
+        $data['kategori']   = $this->u3;
+        $data['tahun']      = $this->laporan_pdf->gruptahun();
 
-        $data['laporan_pdf'] = $this->laporan_pdf->getAll($this->u3);
+        if ($this->u4 == '')
+        {
+            $tahun = tahunAkademik();
+        }
+        else
+        {
+            $tahun = dekrip($this->u4);
+        }
+
+        $data['laporan_pdf'] = $this->laporan_pdf->getAll(['tb_laporan_pdf.kategori' => $this->u3, 'tb_mahasiswa.tahun' => $tahun]);
 
         $this->load->view('admin/backend/index', $data);
     }

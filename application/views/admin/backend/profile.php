@@ -31,8 +31,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Update Foto</label>
-                                    <input type="file" class="form-control" id="image" name="foto_profil"
-                                        autocomplete="off">
+                                    <input type="file" class="form-control" accept=".png, .jpg, .jpeg" id="image"
+                                        name="foto_profil" autocomplete="off">
                                 </div>
                                 <button type="submit" name="update" class="btn btn-primary btn-block">Update</button>
                             </form>

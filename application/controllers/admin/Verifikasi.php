@@ -28,16 +28,36 @@ class Verifikasi extends CI_Controller
         $this->load->model('M_Persetujuan', 'persetujuan');
         $this->load->model('M_Brosur', 'brosur');
         $this->load->model('M_Mahasiswa', 'mahasiswa');
+        $this->load->model('M_verifikasi', 'verifikasi');
 
         $this->load->model('M_Admin', 'admin');
     }
 
     public function index()
     {
+        if ($this->u5 == '')
+        {
+            $tahun = $this->_tahunAkademik();
+        }
+        else
+        {
+            $tahun = dekrip($this->u5);
+        }
+
+        $semester = dekrip($this->u4);
+
         $data['title'] = 'Verifikasi File';
         $data['page'] = 'admin/backend/verifikasi';
+        $data['semester']   = $this->u4;
+        $data['tahun']      = $this->verifikasi->grupTahun();
 
-        $data['mahasiswa'] = $this->mahasiswa->getAll(dekrip($this->u4), 'tb_mahasiswa');
+        if ($semester == 4)
+        {
+            $data['mahasiswa'] = $this->verifikasi->getKP($tahun);
+        }
+        else{
+            $data['mahasiswa'] = $this->verifikasi->getTA($tahun);
+        }
 
         $this->load->view('admin/backend/index', $data);
     }
@@ -204,5 +224,13 @@ class Verifikasi extends CI_Controller
         $update = $this->db->update($tabel, $data);
 
         echo json_encode($update);
+    }
+
+    private function _tahunAkademik()
+    {
+        $time = strtotime("-1 year", time());
+        $date = date("Y", $time);
+
+        return $date . "/" . date('Y');
     }
 }

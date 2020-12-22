@@ -4,12 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Jurnal extends CI_Model
 {
 
-    public function getAll()
+    public function getAll($where)
     {
         $this->db->select('tb_jurnal.id, tb_jurnal.nim, tb_jurnal.nama_jurnal, tb_jurnal.status, tb_jurnal.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_jurnal');
-        $this->db->join('tb_mahasiswa', 'tb_jurnal.nim = tb_mahasiswa.nim', 'left');
-        $this->db->order_by('status', 'desc');
+        $this->db->join('tb_mahasiswa', 'tb_jurnal.nim = tb_mahasiswa.nim', 'inner');
+        if ($where)
+        {
+            $this->db->where($where);
+        }
+        $this->db->order_by('tb_jurnal.create_at', 'desc');
 
         return $this->db->get()->result_array();
     }
@@ -48,5 +52,15 @@ class M_Jurnal extends CI_Model
 
         $this->db->where_in('id', $id);
         $this->db->delete('tb_jurnal');
+    }
+
+    public function gruptahun()
+    {
+        $this->db->select('tahun');
+        $this->db->group_by('tahun');
+        $this->db->order_by('tahun', 'ASC');
+        
+        return $this->db->get('tb_mahasiswa')->result_array();
+        
     }
 }

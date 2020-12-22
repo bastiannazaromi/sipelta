@@ -33,12 +33,12 @@ class Dashboard extends CI_Controller
         $data['mahasiswa'] = count($this->mahasiswa->getAll('', 'tb_mahasiswa'));
         $data['dosen'] = count($this->dosen->getAll());
         $data['admin'] = count($this->admin->getAll());
-        $data['jurnal'] = count($this->jurnal->getAll());
+        $data['jurnal'] = count($this->jurnal->getAll(''));
         $data['laporan_pdf'] = count($this->laporan_pdf->getAll(''));
-        $data['lembar_produk'] = count($this->lembar_produk->getAll());
+        $data['lembar_produk'] = count($this->lembar_produk->getAll(''));
         $data['pengesahan'] = count($this->pengesahan->getAll(''));
-        $data['persetujuan'] = count($this->persetujuan->getAll());
-        $data['brosur'] = count($this->brosur->getAll());
+        $data['persetujuan'] = count($this->persetujuan->getAll(''));
+        $data['brosur'] = count($this->brosur->getAll(''));
 
         $this->load->view('admin/backend/index', $data);
     }

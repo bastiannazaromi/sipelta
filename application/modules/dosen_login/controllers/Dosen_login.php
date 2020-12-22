@@ -55,12 +55,6 @@ class Dosen_login extends CI_Controller {
         }
     }
 
-    public function a()
-    {
-        echo json_encode($this->db->get('tb_dosen')->row_array());
-        
-    }
-
     public function logout()
     {
         $this->session->sess_destroy($this->session->userdata('dosen_login'));

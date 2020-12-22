@@ -61,9 +61,17 @@ $route['admin/mahasiswa/semester/(:any)']               = 'admin/mahasiswa/index
 $route['admin/mahasiswa/semester/(:any)/(:any)']        = 'admin/mahasiswa/index/$1/$2';
 $route['admin/laporan_pdf/(:any)']                      = 'admin/laporan_pdf/index/$1';
 $route['admin/pengesahan/(:any)']                       = 'admin/pengesahan/index/$1';
-$route['admin/verifikasi/kategori/(:any)']              = 'admin/verifikasi/index/$1';
+$route['admin/laporan_pdf/(:any)/(:any)']               = 'admin/laporan_pdf/index/$1/$2';
+$route['admin/pengesahan/(:any)/(:any)']                = 'admin/pengesahan/index/$1/$2';
+$route['admin/verifikasi/kategori/(:any)']              = 'admin/verifikasi/index';
+$route['admin/verifikasi/kategori/(:any)/(:any)']       = 'admin/verifikasi/index';
 
 $route['admin/rekap/(:any)']                            = 'admin/rekap/index';
 $route['admin/rekap/(:any)/(:any)']                     = 'admin/rekap/index';
+$route['admin/jurnal/(:any)']                           = 'admin/jurnal/index';
+$route['admin/lembar_produk/(:any)']                    = 'admin/lembar_produk/index';
+$route['admin/persetujuan/(:any)']                      = 'admin/persetujuan/index';
+$route['admin/brosur/(:any)']                           = 'admin/brosur/index';
 
 $route['dosen/login']                                   = 'dosen_login';
+$route['dosen/logout']                                  = 'dosen_login/logout';

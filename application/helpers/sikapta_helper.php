@@ -182,3 +182,11 @@ function semester()
 
     return $CI->db->get()->result_array();
 }
+
+function tahunAkademik()
+{
+    $time = strtotime("-1 year", time());
+    $date = date("Y", $time);
+
+    return $date . "/" . date('Y');
+}

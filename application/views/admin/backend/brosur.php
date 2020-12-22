@@ -2,6 +2,18 @@
 
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4">
+            <div class="row">
+                <div class="col-sm-3 mb-1 float-sm-right">
+                    <div class="form-group">
+                        <select class="custom-select" id="by_tahun" name="by_tahun">
+                            <option value="">-- Pilih Tahun --</option>
+                            <?php foreach ($tahun as $hasil) : ?>
+                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
+                            <?php endforeach ; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -77,3 +89,17 @@
     </div>
 
 </section>
+
+<script src="<?= base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+    $('#by_tahun').change(function() {
+        let tahun = $(this).find(':selected').val();
+        document.location.href = '<?= base_url('admin/brosur/') ; ?>' +
+            tahun;
+    });
+
+});
+</script>

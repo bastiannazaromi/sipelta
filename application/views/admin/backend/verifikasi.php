@@ -2,16 +2,20 @@
 
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4">
+            <div class="row">
+                <div class="col-sm-3 mb-1 float-sm-right">
+                    <div class="form-group">
+                        <select class="custom-select" id="by_tahun" name="by_tahun">
+                            <option value="">-- Pilih Tahun --</option>
+                            <?php foreach ($tahun as $hasil) : ?>
+                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
+                            <?php endforeach ; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="col-lg-12 col-12 text-right">
-                        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#modalAdd"><i
-                                class="fa fa-plus"></i> Mahasiswa</button>
-                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal"
-                            data-target="#modalImport"><i class="fa fa-plus"></i> Excel</button>
-                    </div>
-                    <br>
-                    <br>
                     <div class="table-responsive">
                         <table id="example" class="table table-bordered table-hover">
                             <thead class="bg-light text-dark">
@@ -19,7 +23,11 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
+                                    <?php if ($semester == enkrip(6)) : ?>
                                     <th>Judul</th>
+                                    <?php else : ?>
+                                    <th>Nama Instansi</th>
+                                    <?php endif ; ?>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -32,7 +40,11 @@
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
+                                    <?php if ($semester == enkrip(6)) : ?>
                                     <td><?= $hasil['judul']; ?></td>
+                                    <?php else : ?>
+                                    <td><?= $hasil['nama_instansi']; ?></td>
+                                    <?php endif ; ?>
                                     <td>
                                         <div class="badge <?= status_file($hasil['nim']) == 'Terverifikasi' ? 'btn-success' : 'badge-warning'; ?>"
                                             role="alert">
@@ -55,3 +67,13 @@
     </div>
 
 </section>
+
+<script src="<?= base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
+
+<script>
+$('#by_tahun').change(function() {
+    let tahun = $(this).find(':selected').val();
+    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/" ; ?>' +
+        tahun;
+});
+</script>

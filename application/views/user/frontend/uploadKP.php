@@ -49,15 +49,16 @@
                         <div class="form-group">
                             <label for="lap_pdf">Laporan PDF <small class="text-dark">( Format : pdf || max : 10 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="lap_pdf" name="lap_pdf" autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf" id="lap_pdf" name="lap_pdf"
+                                autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('lap_pdf'); ?></small>
                         </div>
                         <div class="form-group">
                             <label for="pengesahan">Lembar Pengesahan <small class="text-dark">( Format :
                                     pdf | jpg | jpeg | png max : 5 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="pengesahan" name="pengesahan"
-                                autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg" id="pengesahan"
+                                name="pengesahan" autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('pengesahan'); ?></small>
                         </div>
 

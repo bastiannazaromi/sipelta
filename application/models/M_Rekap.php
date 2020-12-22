@@ -10,7 +10,7 @@ class M_rekap extends CI_Model {
         $this->db->from('tb_mahasiswa');
         $this->db->join('tb_laporan_pdf', 'tb_laporan_pdf.nim = tb_mahasiswa.nim', 'left');
         $this->db->join('tb_pengesahan', 'tb_pengesahan.nim = tb_mahasiswa.nim', 'left');
-        $this->db->where(['semester' => 6, 'tahun' => $tahun]);
+        $this->db->where(['semester' => 4, 'tahun' => $tahun]);
         $this->db->order_by('nim', 'ASC');
 
         return $this->db->get()->result_array();

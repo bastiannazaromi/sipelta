@@ -54,8 +54,8 @@
                                             jpeg | png
                                             || max
                                             : 2 MB )</small></label>
-                                    <input type="file" class="form-control" id="image" name="foto_profil"
-                                        autocomplete="off">
+                                    <input type="file" class="form-control" accept=".png, .jpg, .jpeg" z id="image"
+                                        name="foto_profil" autocomplete="off">
                                     <small class="text-danger"><?= $this->session->flashdata('foto'); ?></small>
                                 </div>
                                 <button type="submit" name="update" class="btn btn-primary btn-block">Update</button>

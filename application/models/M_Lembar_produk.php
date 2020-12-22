@@ -3,12 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Lembar_produk extends CI_Model
 {
-    public function getAll()
+    public function getAll($where)
     {
         $this->db->select('tb_produk.id, tb_produk.nim, tb_produk.nama_file, tb_produk.status, tb_produk.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_produk');
         $this->db->join('tb_mahasiswa', 'tb_produk.nim = tb_mahasiswa.nim', 'left');
-        $this->db->order_by('status', 'desc');
+        if ($where)
+        {
+            $this->db->where($where);
+        }
+        $this->db->order_by('tb_produk.create_at', 'desc');
 
         return $this->db->get()->result_array();
     }
@@ -47,5 +51,15 @@ class M_Lembar_produk extends CI_Model
 
         $this->db->where_in('id', $id);
         $this->db->delete('tb_produk');
+    }
+
+    public function gruptahun()
+    {
+        $this->db->select('tahun');
+        $this->db->group_by('tahun');
+        $this->db->order_by('tahun', 'ASC');
+        
+        return $this->db->get('tb_mahasiswa')->result_array();
+        
     }
 }

@@ -126,15 +126,20 @@
                             </a>
 
                             <ul class="nav nav-treeview ml-3">
-                                <?php foreach (semester() as $hasil) : ?>
                                 <li class="nav-item">
-                                    <a href="<?= base_url('admin/mahasiswa/semester/') . enkrip($hasil['semester']); ?>"
+                                    <a href="<?= base_url('admin/mahasiswa/semester/') . enkrip(4); ?>"
                                         class="nav-link">
                                         <i class="far fa-user nav-icon"></i>
-                                        <p>Semester <?= $hasil['semester']; ?></p>
+                                        <p>Mahasiswa KP</p>
                                     </a>
                                 </li>
-                                <?php endforeach; ?>
+                                <li class="nav-item">
+                                    <a href="<?= base_url('admin/mahasiswa/semester/') . enkrip(6); ?>"
+                                        class="nav-link">
+                                        <i class="far fa-user nav-icon"></i>
+                                        <p>Mahasiswa TA</p>
+                                    </a>
+                                </li>
                             </ul>
 
                         </li>
@@ -414,6 +419,7 @@ $(document).ready(function() {
 
     var table = $('#examples').DataTable({
         lengthChange: false,
+        pageLength: 25,
         buttons: [{
                 extend: 'print',
                 exportOptions: {

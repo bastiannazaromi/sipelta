@@ -49,13 +49,15 @@
                         <div class="form-group">
                             <label for="jurnal">Jurnal <small class="text-dark">( Format : pdf || max : 2 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="jurnal" name="jurnal" autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf" id="jurnal" name="jurnal"
+                                autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('jurnal'); ?></small>
                         </div>
                         <div class="form-group">
                             <label for="lap_pdf">Laporan PDF <small class="text-dark">( Format : pdf || max : 10 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="lap_pdf" name="lap_pdf" autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf" id="lap_pdf" name="lap_pdf"
+                                autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('lap_pdf'); ?></small>
                         </div>
                         <div class="form-group">
@@ -65,30 +67,31 @@
                                     | png || max :
                                     5 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="lembar_produk" name="lembar_produk"
-                                autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg" id="lembar_produk"
+                                name="lembar_produk" autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('lembar_produk'); ?></small>
                         </div>
                         <div class="form-group">
                             <label for="pengesahan">Lembar Pengesahan <small class="text-dark">( Format :
                                     pdf | jpg | jpeg | png max : 5 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="pengesahan" name="pengesahan"
-                                autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg" id="pengesahan"
+                                name="pengesahan" autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('pengesahan'); ?></small>
                         </div>
                         <div class="form-group">
                             <label for="persetujuan">Lembar Persetujuan <small class="text-dark">( Format :
                                     pdf | jpg | jpeg | png || max : 5 MB
                                     )</small></label>
-                            <input type="file" class="form-control" id="persetujuan" name="persetujuan"
-                                autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg" id="persetujuan"
+                                name="persetujuan" autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('persetujuan'); ?></small>
                         </div>
                         <div class="form-group">
                             <label for="brosur">Brosur <small class="text-dark">( Format : pdf | jpg | jpeg |png || max
                                     : 5 MB )</small></label>
-                            <input type="file" class="form-control" id="brosur" name="brosur" autocomplete="off">
+                            <input type="file" class="form-control" accept=".pdf, .png, .jpg, .jpeg" id="brosur"
+                                name="brosur" autocomplete="off">
                             <small class="text-danger"><?= $this->session->flashdata('brosur'); ?></small>
                         </div>
                         <button type="submit" name="update" class="btn btn-primary btn-block">Upload</button>
