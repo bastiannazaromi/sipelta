@@ -23,42 +23,34 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
-                                    <?php if ($semester == enkrip(6)) : ?>
-                                    <th>Judul</th>
-                                    <?php else : ?>
-                                    <th>Nama Instansi</th>
-                                    <?php endif ; ?>
+                                    <th>Judul TA</th>
+                                    <th>Nama File</th>
+                                    <th>Tanggal</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($mahasiswa as $hasil) : ?>
-                                <?php if (status_file($hasil['nim']) != 'File belum lengkap') : ?>
+                                foreach ($brosur as $hasil) : ?>
                                 <tr>
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
-                                    <?php if ($semester == enkrip(6)) : ?>
                                     <td><?= $hasil['judul']; ?></td>
-                                    <?php else : ?>
-                                    <td><?= $hasil['nama_instansi']; ?></td>
-                                    <?php endif ; ?>
                                     <td>
-                                        <div class="badge <?= status_file($hasil['nim']) == 'Terverifikasi' ? 'btn-success' : 'badge-warning'; ?>"
-                                            role="alert">
-                                            <?= status_file($hasil['nim']); ?>
-                                        </div>
+                                        <a href="<?= base_url('assets/uploads/brosur/' . $hasil['nama_file']); ?>"
+                                            target="_blank"><?= $hasil['nama_file']; ?></a>
                                     </td>
-                                    <td>
-                                        <a href="<?= base_url() ?>admin/verifikasi/cek_file/<?= enkrip($hasil['nim']); ?>"
-                                            class="badge badge-success"><i class="fa fa-check"></i> Cek File</a>
+                                    <td><?= $hasil['create_at']; ?></td>
+                                    <td class="text-center">
+                                        <div class="badge <?php echo $hasil['status'] == 'ACC' ? 'btn-success' : 'badge-danger'; ?>"
+                                            role="alert">
+                                            <?= $hasil['status']; ?>
+                                        </div>
+                                    </td>center>
                                     </td>
                                 </tr>
-                                <?php endif; ?>
                                 <?php endforeach; ?>
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -71,9 +63,13 @@
 <script src="<?= base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
 
 <script>
-$('#by_tahun').change(function() {
-    let tahun = $(this).find(':selected').val();
-    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/" ; ?>' +
-        tahun;
+$(document).ready(function() {
+
+    $('#by_tahun').change(function() {
+        let tahun = $(this).find(':selected').val();
+        document.location.href = '<?= base_url('dosen/brosur/') ; ?>' +
+            tahun;
+    });
+
 });
 </script>

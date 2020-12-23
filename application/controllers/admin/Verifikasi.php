@@ -66,19 +66,18 @@ class Verifikasi extends CI_Controller
     {
         $this->data['title'] = 'Verifikasi File';
         $this->data['page'] = 'admin/backend/cek_file';
-
         $this->data['nim'] = $nim;
 
-        $mhs = $this->mahasiswa->getOne($nim);
+        $mhs = $this->mahasiswa->getOne(dekrip($nim));
 
         if ($mhs[0]['semester'] == 6)
         {
-            $this->_cekfileTA($nim);
+            $this->_cekfileTA(dekrip($nim));
         }
 
         else
         {
-            $this->_cekfileKP($nim);
+            $this->_cekfileKP(dekrip($nim));
         }
 
         $this->load->view('admin/backend/index', $this->data);
@@ -206,7 +205,7 @@ class Verifikasi extends CI_Controller
 
     public function update()
     {
-        $nim = $this->input->post('nim');
+        $nim = dekrip($this->input->post('nim'));
         $tabel = $this->input->post('tabel');
         $status = $this->input->post('status');
 
@@ -221,9 +220,9 @@ class Verifikasi extends CI_Controller
         ];
 
         $this->db->where('nim', $nim);
-        $update = $this->db->update($tabel, $data);
+        $this->db->update($tabel, $data);
 
-        echo json_encode($update);
+        echo json_encode($this->security->get_csrf_hash());
     }
 
     private function _tahunAkademik()

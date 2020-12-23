@@ -6,6 +6,8 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
+                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+                                value="<?php echo $this->security->get_csrf_hash(); ?>" id="csrf_id">
                             <thead class="bg-light text-dark">
                                 <tr>
                                     <th>#</th>
@@ -69,10 +71,11 @@
 
 <script>
 $(document).ready(function() {
-    var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
-        csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+
     $('#jurnal_menunggu').change(function() {
 
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
         let tabel = 'tb_jurnal';
         let status = 'Menunggu';
         let nim = $(this).data('nim');
@@ -87,15 +90,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#jurnal_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_jurnal';
         let status = 'ACC';
@@ -111,15 +117,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#jurnal_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_jurnal';
         let status = 'Tolak';
@@ -135,15 +144,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#laporan_pdf_menunggu').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_laporan_pdf';
         let status = 'Menunggu';
@@ -159,15 +171,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#laporan_pdf_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_laporan_pdf';
         let status = 'ACC';
@@ -185,14 +200,16 @@ $(document).ready(function() {
             type: 'post',
             dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#laporan_pdf_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_laporan_pdf';
         let status = 'Tolak';
@@ -208,15 +225,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#lembar_produk_menunggu').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_produk';
         let status = 'Menunggu';
@@ -232,15 +252,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#lembar_produk_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_produk';
         let status = 'ACC';
@@ -256,15 +279,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#lembar_produk_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_produk';
         let status = 'Tolak';
@@ -280,15 +306,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#pengesahan_menunggu').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_pengesahan';
         let status = 'Menunggu';
@@ -304,15 +333,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#pengesahan_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_pengesahan';
         let status = 'ACC';
@@ -328,15 +360,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#pengesahan_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_pengesahan';
         let status = 'Tolak';
@@ -352,15 +387,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#persetujuan_menunggu').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_persetujuan';
         let status = 'Menunggu';
@@ -376,15 +414,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#persetujuan_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_persetujuan';
         let status = 'ACC';
@@ -400,15 +441,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#persetujuan_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_persetujuan';
         let status = 'Tolak';
@@ -424,15 +468,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#brosur_menunggu').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_brosur';
         let status = 'Menunggu';
@@ -448,15 +495,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#brosur_acc').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_brosur';
         let status = 'ACC';
@@ -472,15 +522,18 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });
 
     $('#brosur_tolak').change(function() {
+        let csrfName = $("#csrf_id").attr('name');
+        let csrfHash = $("#csrf_id").val();
 
         let tabel = 'tb_brosur';
         let status = 'Tolak';
@@ -496,10 +549,11 @@ $(document).ready(function() {
         $.ajax({
             url: "<?= base_url('admin/verifikasi/update'); ?>",
             type: 'post',
+            dataType: 'json',
             data: dataJson,
-            success: function() {
-                document.location.href =
-                    `<?= base_url('admin/verifikasi/cek_file/'); ?>${nim}`;
+            success: function(result) {
+                toastr.success('Sukses');
+                $("#csrf_id").val(result);
             }
         });
     });

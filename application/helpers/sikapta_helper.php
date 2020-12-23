@@ -46,6 +46,16 @@ function nama($id)
     return $admin[0]['nama'];
 }
 
+function namaDosen($id)
+{
+    $CI = &get_instance();
+
+    $CI->db->where('id', $id);
+    $data = $CI->db->get('tb_dosen')->row_array();
+
+    return $data['foto'];
+}
+
 function level($id)
 {
     $CI = &get_instance();
@@ -60,6 +70,12 @@ function level($id)
 function status_file($nim)
 {
     $CI = &get_instance();
+    $CI->load->model('M_Jurnal', 'jurnal');
+    $CI->load->model('M_Laporan_pdf', 'laporan_pdf');
+    $CI->load->model('M_Lembar_produk', 'lembar_produk');
+    $CI->load->model('M_Pengesahan', 'pengesahan');
+    $CI->load->model('M_Persetujuan', 'persetujuan');
+    $CI->load->model('M_Brosur', 'brosur');
 
     if ($CI->session->userdata('semester') == 6)
     {

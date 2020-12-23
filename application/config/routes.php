@@ -75,3 +75,5 @@ $route['admin/brosur/(:any)']                           = 'admin/brosur/index';
 
 $route['dosen/login']                                   = 'dosen_login';
 $route['dosen/logout']                                  = 'dosen_login/logout';
+
+$route['dosen/verifikasi/cek_file/(:any)']              = 'dosen/cek_file/$1';

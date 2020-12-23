@@ -52,7 +52,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="<?= base_url() ?>admin/verifikasi/cek_file/<?= enkrip($hasil['nim']); ?>"
+                                        <a href="<?= base_url() ?>dosen/verifikasi/cek_file/<?= enkrip($hasil['nim']); ?>"
                                             class="badge badge-success"><i class="fa fa-check"></i> Cek File</a>
                                     </td>
                                 </tr>
@@ -73,7 +73,7 @@
 <script>
 $('#by_tahun').change(function() {
     let tahun = $(this).find(':selected').val();
-    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/" ; ?>' +
+    document.location.href = '<?= base_url('dosen/verifikasi/') . $semester . "/" ; ?>' +
         tahun;
 });
 </script>

@@ -58,7 +58,7 @@ class Dosen_login extends CI_Controller {
     public function logout()
     {
         $this->session->sess_destroy($this->session->userdata('dosen_login'));
-        redirect('dosen_login', 'refresh');
+        redirect('dosen/login', 'refresh');
     }
 
 }

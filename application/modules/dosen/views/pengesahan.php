@@ -23,42 +23,44 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
-                                    <?php if ($semester == enkrip(6)) : ?>
-                                    <th>Judul</th>
-                                    <?php else : ?>
-                                    <th>Nama Instansi</th>
-                                    <?php endif ; ?>
+                                    <th>Judul TA</th>
+                                    <th>Nama File</th>
+                                    <th>Tanggal</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($mahasiswa as $hasil) : ?>
-                                <?php if (status_file($hasil['nim']) != 'File belum lengkap') : ?>
+                                foreach ($pengesahan as $hasil) : ?>
                                 <tr>
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
-                                    <?php if ($semester == enkrip(6)) : ?>
                                     <td><?= $hasil['judul']; ?></td>
-                                    <?php else : ?>
-                                    <td><?= $hasil['nama_instansi']; ?></td>
-                                    <?php endif ; ?>
                                     <td>
-                                        <div class="badge <?= status_file($hasil['nim']) == 'Terverifikasi' ? 'btn-success' : 'badge-warning'; ?>"
+                                        <a href="<?= base_url('assets/uploads/pengesahan/' . $hasil['nama_file']); ?>"
+                                            target="_blank"><?= $hasil['nama_file']; ?></a>
+                                    </td>
+                                    <td><?= $hasil['create_at']; ?></td>
+                                    <td class="text-center">
+                                        <div class="badge <?php echo $hasil['status'] == 'ACC' ? 'btn-success' : 'badge-danger'; ?>"
                                             role="alert">
-                                            <?= status_file($hasil['nim']); ?>
+                                            <?= $hasil['status']; ?>
                                         </div>
                                     </td>
-                                    <td>
-                                        <a href="<?= base_url() ?>admin/verifikasi/cek_file/<?= enkrip($hasil['nim']); ?>"
-                                            class="badge badge-success"><i class="fa fa-check"></i> Cek File</a>
-                                    </td>
                                 </tr>
-                                <?php endif; ?>
                                 <?php endforeach; ?>
-                            </tbody>
+                            <tfoot>
+                                <tr class="table table-warning">
+                                    <th>-</th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                    <th>-</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -71,9 +73,13 @@
 <script src="<?= base_url(); ?>assets/admin/plugins/jquery/jquery.min.js"></script>
 
 <script>
-$('#by_tahun').change(function() {
-    let tahun = $(this).find(':selected').val();
-    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/" ; ?>' +
-        tahun;
+$(document).ready(function() {
+
+    $('#by_tahun').change(function() {
+        let tahun = $(this).find(':selected').val();
+        document.location.href = '<?= base_url('dosen/pengesahan/') . $kategori . "/" ; ?>' +
+            tahun;
+    });
+
 });
 </script>
