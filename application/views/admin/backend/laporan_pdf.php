@@ -26,7 +26,9 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
+                                    <?php if ($this->u3 == "ta") : ?>
                                     <th>Judul TA</th>
+                                    <?php endif ; ?>
                                     <th>Nama Laporan</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
@@ -42,7 +44,9 @@
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
-                                    <td><?= $hasil['judul']; ?></td>
+                                    <?php if ($this->u3 == "ta") : ?>
+                                    <td><?= $hasil['judul'] ; ?></td>
+                                    <?php endif ; ?>
                                     <td>
                                         <a href="<?= base_url('assets/uploads/laporan_pdf/' . $hasil['nama_laporan_pdf']); ?>"
                                             target="_blank"><?= $hasil['nama_laporan_pdf']; ?></a>
@@ -70,7 +74,9 @@
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
+                                    <?php if ($this->u3 == "ta") : ?>
                                     <th>-</th>
+                                    <?php endif ; ?>
                                     <th>
                                         <center>
                                             <button type="submit" class="btn btn-danger btn-sm"

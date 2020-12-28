@@ -26,7 +26,9 @@
                                     <th>#</th>
                                     <th>NIM</th>
                                     <th>Nama</th>
+                                    <?php if ($this->u3 == "ta") : ?>
                                     <th>Judul TA</th>
+                                    <?php endif ; ?>
                                     <th>Nama File</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
@@ -42,7 +44,9 @@
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
+                                    <?php if ($this->u3 == "ta") : ?>
                                     <td><?= $hasil['judul']; ?></td>
+                                    <?php endif ; ?>
                                     <td>
                                         <a href="<?= base_url('assets/uploads/pengesahan/' . $hasil['nama_file']); ?>"
                                             target="_blank"><?= $hasil['nama_file']; ?></a>
@@ -68,7 +72,9 @@
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
+                                    <?php if ($this->u3 == "ta") : ?>
                                     <th>-</th>
+                                    <?php endif ; ?>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>
