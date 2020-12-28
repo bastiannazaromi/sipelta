@@ -148,9 +148,14 @@ class M_Dsn extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function gruptahun()
+    public function gruptahun($nama)
     {
         $this->db->select('tahun');
+        $this->db->where('semester', 4);
+        $this->db->group_start();
+        $this->db->where('dosbing_1', $nama);
+        $this->db->or_where('dosbing_2', $nama);
+        $this->db->group_end();
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
         

@@ -82,6 +82,7 @@
                                     <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= $hasil['id']; ?>"
                                             class="badge badge-success delete-people"><i class="fa fa-edit"></i>
                                             Reset</a>
+                                    </td>
                                     <td>
                                         <a href="#" class="badge badge-warning" data-toggle="modal"
                                             data-target="#modalEdit<?= $hasil['id']; ?>"><i class="fa fa-edit"></i>

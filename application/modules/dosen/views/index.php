@@ -132,138 +132,30 @@
                                         <p>Mahasiswa KP</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/mahasiswa/') . enkrip(6); ?>" class="nav-link">
-                                        <i class="far fa-user nav-icon"></i>
-                                        <p>Mahasiswa TA</p>
-                                    </a>
-                                </li>
                             </ul>
-
+                            <hr class="bg-light">
                         </li>
 
                         <li class="nav-item has-treeview">
-                            <hr class="bg-light">
-                            <a href="#" class="nav-link hr">
-                                <i class="nav-icon fas fa-file"></i>
+                            <a href="" class="nav-link hr">
+                                <i class="nav-icon fas fa-download"></i>
                                 <p>
-                                    File Upload TA
+                                    Download Form
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
 
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview ml-3">
                                 <li class="nav-item">
-                                    <a href="<?= base_url('dosen/jurnal'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Jurnal TA</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/laporan_pdf/ta'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Laporan TA PDF</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/lembar_produk'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Lembar Produk</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/pengesahan/ta'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Lembar Pengesahan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/persetujuan'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Lembar Persetujuan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/brosur'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Brosur</p>
+                                    <a href="<?= base_url('dosen/form/') . enkrip(4); ?>" class="nav-link">
+                                        <i class="fas fa-file-download nav-icon"></i>
+                                        <p>KP</p>
                                     </a>
                                 </li>
                             </ul>
-
-                        </li>
-
-                        <li class="nav-item has-treeview">
-                            <hr class="bg-light">
-                            <a href="#" class="nav-link hr">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>
-                                    File Upload KP
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/laporan_pdf/kp'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Laporan KP PDF</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?= base_url('dosen/pengesahan/kp'); ?>" class="nav-link">
-                                        <i class="fas fa-book nav-icon"></i>
-                                        <p>Lembar Pengesahan</p>
-                                    </a>
-
-                                </li>
-                            </ul>
-
                             <hr class="bg-light">
 
                         </li>
-
-                        <li class="nav-item has-treeview">
-                            <a href="<?= base_url('dosen/verifikasi/') . enkrip(6) ; ?>" class="nav-link hr">
-                                <i class="nav-icon fas fa-check"></i>
-                                <p>
-                                    Verifikasi File TA
-                                </p>
-                            </a>
-
-
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="<?= base_url('dosen/verifikasi/') . enkrip(4) ; ?>" class="nav-link hr">
-                                <i class="nav-icon fas fa-check"></i>
-                                <p>
-                                    Verifikasi File KP
-                                </p>
-                            </a>
-
-                            <hr class="bg-light">
-
-                        </li>
-
-                        <li class="nav-item has-treeview">
-                            <a href="<?= base_url('dosen/rekap/') . enkrip(6) ; ?>" class="nav-link hr">
-                                <i class="nav-icon fas fa-window-restore"></i>
-                                <p>
-                                    Rekap TA
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="<?= base_url('dosen/rekap/') . enkrip(4) ; ?>" class="nav-link hr">
-                                <i class="nav-icon fas fa-window-restore"></i>
-                                <p>
-                                    Rekap KP
-                                </p>
-                            </a>
-
-                            <hr class="bg-light">
-                        </li>
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
