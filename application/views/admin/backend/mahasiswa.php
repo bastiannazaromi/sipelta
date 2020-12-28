@@ -79,7 +79,7 @@
                                     <?php endif ; ?>
                                     <td><?= $hasil['tahun']; ?></td>
 
-                                    <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= $hasil['id']; ?>"
+                                    <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= enkrip($hasil['id']); ?>"
                                             class="badge badge-success delete-people"><i class="fa fa-edit"></i>
                                             Reset</a>
                                     </td>

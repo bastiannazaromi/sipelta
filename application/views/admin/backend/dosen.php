@@ -23,8 +23,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama</th>
+                                    <th>Username</th>
                                     <th>NIPY</th>
                                     <th>NIDN</th>
+                                    <th>Password</th>
                                     <th>Action</th>
                                     <th>
                                         <center><input type="checkbox" id="check-all"></center>
@@ -37,8 +39,13 @@
                                 <tr>
                                     <th><?= $i++ ?></th>
                                     <td><?= $hasil['nama']; ?></td>
+                                    <td><?= $hasil['username']; ?></td>
                                     <td><?= $hasil['nipy']; ?></td>
                                     <td><?= $hasil['nidn']; ?></td>
+                                    <td><a href="<?= base_url() ?>admin/dosen/resetPassword/<?= enkrip($hasil['id']); ?>"
+                                            class="badge badge-success delete-people"><i class="fa fa-edit"></i>
+                                            Reset</a>
+                                    </td>
                                     <td>
                                         <a href="#" class="badge badge-warning" data-toggle="modal"
                                             data-target="#modalEdit<?= $hasil['id']; ?>"><i class="fa fa-edit"></i>
@@ -55,6 +62,8 @@
                             </tbody>
                             <tfoot>
                                 <tr class="table table-warning">
+                                    <th>-</th>
+                                    <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
@@ -96,15 +105,19 @@
                         value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
                         <label for="nama">Nama Dosen</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off">
+                        <input type="text" class="form-control" name="nama" required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="nipy">NIPY</label>
-                        <input type="text" class="form-control" id="nipy" name="nipy" required autocomplete="off">
+                        <input type="text" class="form-control" name="nipy" required autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="nidn">NIDN</label>
-                        <input type="text" class="form-control" id="nidn" name="nidn" required autocomplete="off">
+                        <input type="text" class="form-control" name="nidn" required autocomplete="off">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -135,17 +148,22 @@
                         value="<?php echo $this->security->get_csrf_hash(); ?>">
                     <div class="form-group">
                         <label for="nama">Nama Dosen</label>
-                        <input type="text" class="form-control" id="nama" name="nama" required autocomplete="off"
+                        <input type="text" class="form-control" name="nama" required autocomplete="off"
                             value="<?= $dt['nama']; ?>">
                     </div>
                     <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" required autocomplete="off"
+                            value="<?= $dt['username']; ?>">
+                    </div>
+                    <div class="form-group">
                         <label for="nipy">NIPY</label>
-                        <input type="text" class="form-control" id="nipy" name="nipy" required autocomplete="off"
+                        <input type="text" class="form-control" name="nipy" required autocomplete="off"
                             value="<?= $dt['nipy']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="nidn">NIDN</label>
-                        <input type="text" class="form-control" id="nidn" name="nidn" required autocomplete="off"
+                        <input type="text" class="form-control" name="nidn" required autocomplete="off"
                             value="<?= $dt['nidn']; ?>">
                     </div>
                 </div>

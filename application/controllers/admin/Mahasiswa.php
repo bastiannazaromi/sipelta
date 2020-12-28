@@ -192,7 +192,7 @@ class Mahasiswa extends CI_Controller
 
     public function resetPassword($id)
     {
-        $this->db->where('id', $id);
+        $this->db->where('id', dekrip($id));
 
         $data = $this->db->get('tb_mahasiswa')->result_array();
 
@@ -200,7 +200,7 @@ class Mahasiswa extends CI_Controller
             "password" => password_hash($data[0]['nim'], PASSWORD_DEFAULT)
         ];
 
-        $this->mahasiswa->resetPassword($data, $id);
+        $this->mahasiswa->resetPassword($data, dekrip($id));
 
         $this->session->set_flashdata('flash-sukses', 'Password berhasil direset');
         $previous_url = $this->session->userdata('previous_url');

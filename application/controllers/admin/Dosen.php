@@ -14,6 +14,7 @@ class Dosen extends CI_Controller
         }
 
         $this->load->model('M_Dosen', 'dosen');
+        $this->load->model('M_Universal', 'universal');
     }
 
     public function index()
@@ -28,36 +29,83 @@ class Dosen extends CI_Controller
 
     public function tambah()
     {
-        $data = [
-            "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
-            "nipy" => htmlspecialchars($this->input->post('nipy', TRUE)),
-            "nidn" => htmlspecialchars($this->input->post('nidn', TRUE))
-        ];
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nipy', 'NIPY', 'required');
+        $this->form_validation->set_rules('nidn', 'NIDN', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
 
-        $this->dosen->tambah($data);
-
-        $this->session->set_flashdata('flash-sukses', 'Data berhasil ditambahkan');
-        redirect('admin/dosen');
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('toastr-error', validation_errors());
+            redirect('admin/dosen');
+        }
+        else {
+            $data = [
+                "nama"          => htmlspecialchars($this->input->post('nama', TRUE)),
+                "nipy"          => htmlspecialchars($this->input->post('nipy', TRUE)),
+                "nidn"          => htmlspecialchars($this->input->post('nidn', TRUE)),
+                "username"      => htmlspecialchars($this->input->post('username', TRUE)),
+                "password"      => password_hash('dosen', PASSWORD_DEFAULT)
+            ];
+    
+            $this->dosen->tambah($data);
+    
+            $this->session->set_flashdata('toastr-sukses', 'Data berhasil ditambahkan');
+            redirect('admin/dosen');
+        }
     }
 
     public function edit()
     {
-        $data = [
-            "nama" => htmlspecialchars($this->input->post('nama', TRUE)),
-            "nipy" => htmlspecialchars($this->input->post('nipy', TRUE)),
-            "nidn" => htmlspecialchars($this->input->post('nidn', TRUE))
-        ];
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nipy', 'NIPY', 'required');
+        $this->form_validation->set_rules('nidn', 'NIDN', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required');
 
-        $this->dosen->edit($data);
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('toastr-error', validation_errors());
+            redirect('admin/dosen');
+        }
+        else {
+            $data = [
+                "nama"          => htmlspecialchars($this->input->post('nama', TRUE)),
+                "nipy"          => htmlspecialchars($this->input->post('nipy', TRUE)),
+                "nidn"          => htmlspecialchars($this->input->post('nidn', TRUE)),
+                "username"      => htmlspecialchars($this->input->post('username', TRUE))
+            ];
+    
+            $this->dosen->edit($data);
+    
+            $this->session->set_flashdata('toastr-sukses', 'Data berhasil diupdate');
+            redirect('admin/dosen');
+        }
+        
+    }
 
-        $this->session->set_flashdata('flash-sukses', 'Data berhasil diupdate');
-        redirect('admin/dosen');
+    public function resetPassword($id)
+    {
+        $id = dekrip($id);
+
+        $data = ['password' => password_hash('dosen', PASSWORD_DEFAULT)];
+
+        $update = $this->universal->update($data, ['id' => $id], 'tb_dosen');
+
+        if ($update)
+        {
+            $this->session->set_flashdata('toastr-sukses', 'Password berhasil direset');
+            redirect('admin/dosen');
+        }
+        else {
+            $this->session->set_flashdata('toastr-error', 'Password gagal direset');
+            redirect('admin/dosen');
+        }
     }
 
     public function hapus($id)
     {
         $this->dosen->hapus($id);
-        $this->session->set_flashdata('flash-sukses', 'Data berhasil dihapus');
+        $this->session->set_flashdata('toastr-sukses', 'Data berhasil dihapus');
         redirect('admin/dosen');
     }
 
@@ -99,6 +147,8 @@ class Dosen extends CI_Controller
                                 'nama' => htmlspecialchars($row['B']),
                                 'nipy' => htmlspecialchars(str_replace('\'', '', $row['C'])),
                                 'nidn' => htmlspecialchars(str_replace('\'', '', $row['D'])),
+                                'username' => htmlspecialchars(str_replace('\'', '', $row['E'])),
+                                'password' => password_hash(str_replace('\'', '', $row['E']), PASSWORD_DEFAULT),
                             ));
                         }
                     }
@@ -110,7 +160,7 @@ class Dosen extends CI_Controller
             unlink(realpath('excel/' . $data_upload['file_name']));
 
             //upload success
-            $this->session->set_flashdata('flash-sukses', 'Data berhasil di import');
+            $this->session->set_flashdata('toastr-sukses', 'Data berhasil di import');
             //redirect halaman
             redirect('admin/dosen');
         }
@@ -120,12 +170,12 @@ class Dosen extends CI_Controller
     {
         $id = $this->input->post('id');
         if ($id == NULL) {
-            $this->session->set_flashdata('flash-error', 'Pilih data yang akan dihapus !');
+            $this->session->set_flashdata('toastr-error', 'Pilih data yang akan dihapus !');
             redirect('admin/dosen');
         } else {
             $this->dosen->multiple_delete($id);
 
-            $this->session->set_flashdata('flash-sukses', 'Data berhasil di hapus');
+            $this->session->set_flashdata('toastr-sukses', 'Data berhasil di hapus');
             redirect('admin/dosen');
         }
     }
