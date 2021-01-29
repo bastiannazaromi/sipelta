@@ -33,12 +33,9 @@ class Dapur extends CI_Controller
 
         $this->data['mahasiswa'] = $this->mahasiswa->getOne($nim);
 
-        if ($this->session->userdata('semester') == 6)
-        {
+        if ($this->session->userdata('semester') == 6) {
             $this->_homeTA();
-        }
-        else
-        {
+        } else {
             $this->_homeKP();
         }
 
@@ -48,7 +45,7 @@ class Dapur extends CI_Controller
     private function _homeTA()
     {
         $nim = $this->session->userdata('nim');
-        
+
         $jurnal = $this->jurnal->getOne($nim);
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $lembar_produk = $this->lembar_produk->getOne($nim);
@@ -138,7 +135,7 @@ class Dapur extends CI_Controller
     private function _homeKP()
     {
         $nim = $this->session->userdata('nim');
-        
+
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $pengesahan = $this->pengesahan->getOne($nim);
 
@@ -302,12 +299,9 @@ class Dapur extends CI_Controller
         $nim = $this->session->userdata('nim');
         cek_biodata($nim);
 
-        if ($this->session->userdata('nim') == 6)
-        {
+        if ($this->session->userdata('nim') == 6) {
             $this->_berkasTA($nim);
-        }
-        else
-        {
+        } else {
             $this->_berkasKP($nim);
         }
 
@@ -607,7 +601,7 @@ class Dapur extends CI_Controller
     {
         $upload_lap_pdf = $_FILES['lap_pdf']['name'];
         $upload_pengesahan = $_FILES['pengesahan']['name'];
-        
+
         // laporan pdf
         if ($upload_lap_pdf) {
 
@@ -708,12 +702,9 @@ class Dapur extends CI_Controller
     {
         $nim = $this->session->userdata('nim');
 
-        if ($this->session->userdata('semester') == 6)
-        {
+        if ($this->session->userdata('semester') == 6) {
             $this->_downloadTA($nim);
-        }
-        else
-        {
+        } else {
             $this->_downloadKP($nim);
         }
     }
@@ -987,7 +978,7 @@ class Dapur extends CI_Controller
         $mahasiswa = $this->mahasiswa->getOne($nim);
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $pengesahan = $this->pengesahan->getOne($nim);
-        
+
         if (!$laporan_pdf) {
             $laporan_pdf = [
                 "tanggal" => "-",
@@ -999,7 +990,7 @@ class Dapur extends CI_Controller
                 "status" => $laporan_pdf[0]['status']
             ];
         }
-    
+
         if (!$pengesahan) {
             $pengesahan = [
                 "tanggal" => "-",

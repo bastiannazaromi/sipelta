@@ -1,8 +1,9 @@
-<?php 
+<?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dosen extends CI_Controller {
+class Dosen extends CI_Controller
+{
 
     public function __construct()
     {
@@ -12,12 +13,12 @@ class Dosen extends CI_Controller {
             redirect('dosen/login', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Jurnal', 'jurnal');
         $this->load->model('M_Laporan_pdf', 'laporan_pdf');
@@ -40,17 +41,11 @@ class Dosen extends CI_Controller {
         $data['title'] = 'Dashboard Dosen';
         $data['page'] = 'dashboard';
 
-        $data['mahasiswa'] = count($this->dosen->getMhs($this->nama, ''));
-        $data['jurnal'] = count($this->dosen->getJurnal($this->nama, ''));
-        $data['laporan_pdf'] = count($this->dosen->getLapPdf($this->nama, ''));
-        $data['lembar_produk'] = count($this->dosen->getProduk($this->nama, ''));
-        $data['pengesahan'] = count($this->dosen->getPengesahan($this->nama, ''));
-        $data['persetujuan'] = count($this->dosen->getPersetujuan($this->nama, ''));
-        $data['brosur'] = count($this->dosen->getBrosur($this->nama, ''));
+        $data['mahasiswa'] = count($this->dosen->getMhs($this->nama, ['semester' => 4]));
 
         // echo $this->nama; die();
 
-        $this->load->view('index', $data);   
+        $this->load->view('index', $data);
     }
 
     public function mahasiswa()
@@ -58,20 +53,16 @@ class Dosen extends CI_Controller {
         $data['title'] = 'List Mahasiswa';
         $data['page'] = 'mahasiswa';
 
-        if ($this->u4 != '')
-        {
+        if ($this->u4 != '') {
             $tahun = dekrip($this->u4);
-        }
-        else
-        {
+        } else {
             $tahun = tahunAkademik();
         }
-        
+
         $data['mahasiswa'] = $this->dosen->getMhs($this->nama, ['semester' => dekrip($this->u3), 'tahun' => $tahun]);
         $data['dosen'] = $this->dosen->getAll();
         $data['semester'] = $this->u3;
         $data['tahun']    = $this->dosen->gruptahun($this->nama);
-
 
         $this->session->set_userdata('previous_url', current_url());
         $this->load->view('index', $data);
@@ -83,12 +74,9 @@ class Dosen extends CI_Controller {
         $data['page']       = 'jurnal';
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
 
@@ -104,12 +92,9 @@ class Dosen extends CI_Controller {
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
         $data['kategori']   = $this->u3;
 
-        if ($this->u4 == '')
-        {
+        if ($this->u4 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u4);
         }
 
@@ -124,12 +109,9 @@ class Dosen extends CI_Controller {
         $data['page']       = 'lembar_produk';
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
 
@@ -145,12 +127,9 @@ class Dosen extends CI_Controller {
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
         $data['kategori']   = $this->u3;
 
-        if ($this->u4 == '')
-        {
+        if ($this->u4 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u4);
         }
 
@@ -165,12 +144,9 @@ class Dosen extends CI_Controller {
         $data['page']       = 'persetujuan';
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
 
@@ -185,12 +161,9 @@ class Dosen extends CI_Controller {
         $data['page']       = 'brosur';
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
 
@@ -202,13 +175,10 @@ class Dosen extends CI_Controller {
     public function rekap()
     {
         $semester = dekrip($this->u3);
-        if ($this->u4 == '')
-        {
+        if ($this->u4 == '') {
             $tahun  = tahunAkademik();
-        }
-        else
-        {
-            $tahun  = dekrip($this->u4);  
+        } else {
+            $tahun  = dekrip($this->u4);
         }
 
         $data['title']      = 'Rekap data upload berkas';
@@ -216,12 +186,9 @@ class Dosen extends CI_Controller {
         $data['semester']   = $this->u3;
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($semester == 4)
-        {
+        if ($semester == 4) {
             $data['rekap']      = $this->dosen->getKP($tahun, $this->nama);
-        }
-        else
-        {
+        } else {
             $data['rekap']      = $this->dosen->getTA($tahun, $this->nama);
         }
 
@@ -231,12 +198,9 @@ class Dosen extends CI_Controller {
 
     public function verifikasi()
     {
-        if ($this->u4 == '')
-        {
+        if ($this->u4 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u4);
         }
 
@@ -247,11 +211,9 @@ class Dosen extends CI_Controller {
         $data['semester']   = $this->u3;
         $data['tahun']      = $this->dosen->gruptahun($this->nama);
 
-        if ($semester == 4)
-        {
+        if ($semester == 4) {
             $data['mahasiswa'] = $this->dosen->getKPVerifikasi($tahun, $this->nama);
-        }
-        else{
+        } else {
             $data['mahasiswa'] = $this->dosen->getTAVerifikasi($tahun, $this->nama);
         }
 
@@ -265,13 +227,9 @@ class Dosen extends CI_Controller {
 
         $mhs = $this->universal->getOne(['nim' => dekrip($nim)], 'tb_mahasiswa');
 
-        if ($mhs->semester == 6)
-        {
+        if ($mhs->semester == 6) {
             $this->_cekfileTA(dekrip($nim));
-        }
-
-        else
-        {
+        } else {
             $this->_cekfileKP(dekrip($nim));
         }
 
@@ -368,7 +326,7 @@ class Dosen extends CI_Controller {
     {
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $pengesahan = $this->pengesahan->getOne($nim);
-        
+
         if ($laporan_pdf) {
             $j_lap_pdf = $laporan_pdf[0]['nama_laporan_pdf'];
             $s_lap_pdf = $laporan_pdf[0]['status'];
@@ -383,7 +341,7 @@ class Dosen extends CI_Controller {
             $j_pengesahan = null;
             $s_pengesahan = null;
         }
-        
+
         $this->data['berkas'] = [
             "0" => [
                 "berkas" => 'laporan_pdf',
@@ -403,15 +361,12 @@ class Dosen extends CI_Controller {
         $data['title'] = 'Form Download Berkas';
         $data['page'] = 'form';
 
-        if ($this->u4 != '')
-        {
+        if ($this->u4 != '') {
             $tahun = dekrip($this->u4);
-        }
-        else
-        {
+        } else {
             $tahun = tahunAkademik();
         }
-        
+
         $data['mahasiswa'] = $this->dosen->getMhs($this->nama, ['semester' => dekrip($this->u3), 'tahun' => $tahun]);
         $data['dosen'] = $this->dosen->getAll();
         $data['semester'] = $this->u3;
@@ -423,9 +378,8 @@ class Dosen extends CI_Controller {
     public function beritaAcara()
     {
         $nim = dekrip($this->u3);
-        
-        if ($nim)
-        {
+
+        if ($nim) {
             $mahasiswa = $this->universal->getOne(['nim' => $nim], 'tb_mahasiswa');
 
             $pdf = new FPDF('p', 'mm', 'A4');
@@ -438,7 +392,7 @@ class Dosen extends CI_Controller {
             $pdf->Cell(190, 6, 'PENYELENGGARAAN SUPERVISI KERJA PRAKTEK', 0, 1, 'C');
             $pdf->Cell(190, 6, 'TAHUN AKADEMIK ' . $mahasiswa->tahun, 0, 1, 'C');
             $pdf->Cell(190, 6, 'MAHASISWA POLITEKNIK HARAPAN BERSAMA TEGAL', 0, 1, 'C');
-            
+
             $pdf->SetLineWidth(1);
             $pdf->Line(10, 35, 200, 35);
             $pdf->SetLineWidth(0);
@@ -463,20 +417,20 @@ class Dosen extends CI_Controller {
             $pdf->Cell(1, 5, 'Catatan selama pelaksanaan Kegiatan : ', 0, 1);
 
             $pdf->SetLineWidth(0.4);
-            $pdf->SetDash(1,1); //5mm on, 5mm off
-            $pdf->Line(12,94,198,94);
-            $pdf->Line(12,101,198,100);
-            $pdf->Line(12,108,198,108);
-            $pdf->Line(12,115,198,115);
-            $pdf->Line(12,122,198,122);
-            $pdf->Line(12,129,198,129);
-            $pdf->Line(12,136,198,136);
+            $pdf->SetDash(1, 1); //5mm on, 5mm off
+            $pdf->Line(12, 94, 198, 94);
+            $pdf->Line(12, 101, 198, 100);
+            $pdf->Line(12, 108, 198, 108);
+            $pdf->Line(12, 115, 198, 115);
+            $pdf->Line(12, 122, 198, 122);
+            $pdf->Line(12, 129, 198, 129);
+            $pdf->Line(12, 136, 198, 136);
 
             $pdf->Ln(55);
             $demikian = 'Demikianlah berita acara ini kami buat dengan sebenar-benarnya dan dapat dipergunakan sebagaimana mestinya.';
-        
+
             $pdf->MultiCell(193, 6, $demikian, 0, 1);
-            
+
             $pdf->Ln(15);
             $pdf->Cell(125, 5, '', 0, 0);
             $pdf->Cell(13, 5, 'Tegal, ', 0, 0);
@@ -507,9 +461,8 @@ class Dosen extends CI_Controller {
     public function k_kp()
     {
         $nim = dekrip($this->u3);
-        
-        if ($nim)
-        {
+
+        if ($nim) {
             $mahasiswa = $this->universal->getOne(['nim' => $nim], 'tb_mahasiswa');
 
             $pdf = new FPDF('p', 'mm', 'A4');
@@ -519,7 +472,7 @@ class Dosen extends CI_Controller {
 
             $pdf->SetFont('Times', 'B', 12);
             $pdf->Image('assets/uploads/poltek.png', 11, 10, 20, 20);
-            
+
             $pdf->Cell(30, 6, '');
             $pdf->Cell(1, 6, 'SUPERVISI KERJA PRAKTEK', 0, 1);
             $pdf->Cell(30, 6, '');
@@ -531,7 +484,7 @@ class Dosen extends CI_Controller {
             $pdf->Cell(10, 6, 'P2M', 1, 0, 'C');
             $pdf->Cell(10, 6, 'PHB', 1, 0, 'C');
             $pdf->Cell(25, 6, '02.02.C.5.11', 1, 1, 'C');
-            
+
             $pdf->SetLineWidth(1);
             $pdf->Line(41, 30, 200, 30);
             $pdf->SetLineWidth(0);
@@ -540,7 +493,7 @@ class Dosen extends CI_Controller {
             $pdf->Ln(5);
 
             $pdf->SetFont('Times', 'B', 12);
-            
+
             $pdf->Cell(1, 6, '');
             $pdf->Cell(7, 6, '1.', 0, 0);
             $pdf->Cell(1, 6, 'IDENTITAS SUPERVISOR DAN MAHASISWA', 0, 1);
@@ -549,10 +502,10 @@ class Dosen extends CI_Controller {
             $pdf->Cell(8, 6, '');
             $pdf->SetFillColor(204, 204, 204);
             $pdf->MultiCell(91, 6, 'SUPERVISOR', 1, 'C', 1);
-            $xPos=$pdf->GetX();
-            $yPos=$pdf->GetY();
-    
-            $pdf->SetXY($xPos + 99 , $yPos);
+            $xPos = $pdf->GetX();
+            $yPos = $pdf->GetY();
+
+            $pdf->SetXY($xPos + 99, $yPos);
 
             $pdf->MultiCell(91, -6, 'MAHASISWA', 1, 'C', 1);
 
@@ -577,7 +530,7 @@ class Dosen extends CI_Controller {
 
             $pdf->Ln(2);
             $pdf->SetFont('Times', 'B', 12);
-            
+
             $pdf->Cell(1, 6, '');
             $pdf->Cell(7, 6, '2.', 0, 0);
             $pdf->Cell(1, 6, 'IDENTITAS TEMPAT KERJA PRAKTEK', 0, 1);
@@ -630,7 +583,7 @@ class Dosen extends CI_Controller {
             $pdf->Cell(10, 6, '1', 1, 0, 'C');
             $pdf->Cell(10, 6, '2', 1, 0, 'C');
             $pdf->Cell(10, 6, '3', 1, 1, 'C');
-            
+
             $pdf->Cell(148, 12, '');
             $pdf->Cell(42, -12, 'Keterangan', 1, 1, 'C');
 
@@ -663,10 +616,10 @@ class Dosen extends CI_Controller {
             $pdf->Cell(8, 6, '');
             $pdf->MultiCell(140, 6, 'PELAKSANAAN KERJA PRAKTEK', 1, 'L', 1);
             $pdf->SetFont('Times', '', 10);
-            $xPos=$pdf->GetX();
-            $yPos=$pdf->GetY();
-    
-            $pdf->SetXY($xPos + 148 , $yPos);
+            $xPos = $pdf->GetX();
+            $yPos = $pdf->GetY();
+
+            $pdf->SetXY($xPos + 148, $yPos);
             $pdf->Cell(25, -6, 'Cukup Bagus', 0, 0);
             $pdf->Cell(3, -6, ':', 0, 1);
             $pdf->Cell(1, 6, '', 0, 1);
@@ -703,10 +656,10 @@ class Dosen extends CI_Controller {
 
             $pdf->MultiCell(100, 6, $point_7, 1, 1);
 
-            $xPos=$pdf->GetX();
-            $yPos=$pdf->GetY();
-    
-            $pdf->SetXY($xPos + 118 , $yPos);
+            $xPos = $pdf->GetX();
+            $yPos = $pdf->GetY();
+
+            $pdf->SetXY($xPos + 118, $yPos);
             $pdf->Cell(10, -12, '', 1, 0);
             $pdf->Cell(10, -12, '', 1, 0);
             $pdf->Cell(10, -12, '', 1, 1);
@@ -764,7 +717,7 @@ class Dosen extends CI_Controller {
             $pdf->Cell(8, 5, '', 0, 0);
             $pdf->Cell(100, 5, 'NIPY....................................................', 0, 0);
             $pdf->Cell(1, 5, 'NIP.......................................................', 0, 1);
-            
+
             $pdf->Output($mahasiswa->nim . '_kuisioner_monitoring_kp.pdf', 'I');
         }
     }
@@ -772,9 +725,8 @@ class Dosen extends CI_Controller {
     public function k_m()
     {
         $nim = dekrip($this->u3);
-        
-        if ($nim)
-        {
+
+        if ($nim) {
             $mahasiswa = $this->universal->getOne(['nim' => $nim], 'tb_mahasiswa');
 
             $pdf = new FPDF('p', 'mm', 'A4');
@@ -788,22 +740,22 @@ class Dosen extends CI_Controller {
             $pdf->Cell(10, 6, 'AS', 1, 0, 'C');
             $pdf->Cell(10, 6, 'P2M', 1, 0, 'C');
             $pdf->Cell(25, 6, 'PHB.02.10.A.8', 1, 1, 'C');
-            
+
             $pdf->SetLineWidth(0);
             $pdf->Line(9, 18, 200, 18);
 
             $pdf->Ln(5);
             $pdf->SetFont('Times', 'B', 11);
             $pdf->Image('assets/uploads/poltek.png', 12, 20, 19, 19);
-            
+
             $pdf->Cell(30, 5, '');
             $pdf->Cell(155, 5, 'KUISIONER DENGAN MITRA', 0, 1, 'C');
             $pdf->Cell(30, 5, '');
             $pdf->Cell(155, 5, 'EVALUASI KERJA SAMA MITRA DENGAN', 0, 1, 'C');
             $pdf->Cell(30, 5, '');
             $pdf->Cell(155, 5, 'PROGRAM STUDI D-III TEKNIK KOMPUTER POLITEKNIK HARAPAN BERSAMA', 0, 0, 'C');
-        
-            
+
+
             $pdf->SetLineWidth(1);
             $pdf->Line(35, 37, 201, 37);
             $pdf->SetLineWidth(0);
@@ -815,7 +767,7 @@ class Dosen extends CI_Controller {
 
             $demi = 'Demi meningkatkan kerja sama yang telah dilakukan selama tahun 2010-2014 antara mitra dengan prodi D-III Politeknik Harapan Bersama, maka kami mengharap kesediaan Saudara untuk mengisi kuisioner berikut sesuai dengan keadaan sebenarnya. Lembar penilaian ini ditujukan untuk meningkatkan mutu proses pembelajaran dan lulusannya, sehingga para lulusan dari D-III Teknik komputer Politeknik Harapan Bersama Tegal dapat siap diberdayakan oleh stakeholder/user.';
 
-            $pdf->SetFillColor(255,255,255);
+            $pdf->SetFillColor(255, 255, 255);
 
             $pdf->MultiCell(192, 5, $demi, 0, 'FJ', 1);
 
@@ -862,16 +814,16 @@ class Dosen extends CI_Controller {
             $pdf->Cell(15, 10, 'Baik', 1, 0, 'C');
             $pdf->Cell(15, 10, 'Cukup', 1, 0, 'C');
             $pdf->Cell(23, 10, 'Kurang Baik', 1, 0, 'C');
-            $pdf->MultiCell(26, 5, 'Sangat Kurang Baik', 1, 'C' ,1);
+            $pdf->MultiCell(26, 5, 'Sangat Kurang Baik', 1, 'C', 1);
 
             $pdf->setFont('Times', '', '10');
             $pdf->Cell(10, 15, '1', 1, 0, 'C');
             $pdf->MultiCell(80, 5, "Bagaimana kesiapan D-III politeknik Harapan Bersama dalam menyelenggarakan kerjasama dengan instansi Saudara ?", 1, 1);
-            
+
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
-            
-            $pdf->SetXY($xPos + 90 , $yPos);
+
+            $pdf->SetXY($xPos + 90, $yPos);
             $pdf->Cell(21, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
@@ -882,11 +834,11 @@ class Dosen extends CI_Controller {
 
             $pdf->Cell(10, 10, '2', 1, 0, 'C');
             $pdf->MultiCell(80, 5, "Bagaimana kepuasan Saudara selama berkeja sama dengan D-III Politeknik Harapan bersama ?", 1, 1);
-            
+
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
-            
-            $pdf->SetXY($xPos + 90 , $yPos);
+
+            $pdf->SetXY($xPos + 90, $yPos);
             $pdf->Cell(21, -10, '', 1, 0);
             $pdf->Cell(15, -10, '', 1, 0);
             $pdf->Cell(15, -10, '', 1, 0);
@@ -897,11 +849,11 @@ class Dosen extends CI_Controller {
 
             $pdf->Cell(10, 15, '3', 1, 0, 'C');
             $pdf->MultiCell(80, 5, "Apakah hasil pembelajaran di D-III Politeknik Harapan Bersama teah sesuai dengan spesifiskasi yang dibutuhkan oleh stakeholder/user", 1, 1);
-            
+
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
-            
-            $pdf->SetXY($xPos + 90 , $yPos);
+
+            $pdf->SetXY($xPos + 90, $yPos);
             $pdf->Cell(21, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
@@ -912,11 +864,11 @@ class Dosen extends CI_Controller {
 
             $pdf->Cell(10, 15, '4', 1, 0, 'C');
             $pdf->MultiCell(80, 5, "Apakah disiplin ilmu di D-III Politeknik Harapan Bersama telah sesuai dengan spesifiskasi yang dibutuhkan oleh stakeholder/user", 1, 1);
-            
+
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
-            
-            $pdf->SetXY($xPos + 90 , $yPos);
+
+            $pdf->SetXY($xPos + 90, $yPos);
             $pdf->Cell(21, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
@@ -927,17 +879,17 @@ class Dosen extends CI_Controller {
 
             $pdf->Cell(10, 15, '4', 1, 0, 'C');
             $pdf->MultiCell(80, 5, "Bagaimana kelancaran atau kemudahan komunikasi  D-III Politeknik Harapan dengan Perusahaan Saudara ?", 1, 1);
-            
+
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
-            
-            $pdf->SetXY($xPos + 90 , $yPos);
+
+            $pdf->SetXY($xPos + 90, $yPos);
             $pdf->Cell(21, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
             $pdf->Cell(15, -15, '', 1, 0);
             $pdf->Cell(23, -15, '', 1, 0);
-            $pdf->Cell(26, -15, '', 1, 1); 
-            
+            $pdf->Cell(26, -15, '', 1, 1);
+
             $pdf->SetFillColor(204, 204, 204);
             $pdf->Cell(1, 15, '', 0, 1);
             $pdf->MultiCell(190, 5, 'PENGEMBANGAN KETRAMPILAN MAHASISWA', 1, 'C', 1);
@@ -951,7 +903,7 @@ class Dosen extends CI_Controller {
 
             $pdf->Cell(10, 25, '6', 0, 0, 'C');
             $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pertemuan rutin  D-III Politeknik Harapan dengan Perusahaan Saudara?(Jika perlu tolong berikan masukan pertemuan yang diinginkan :", 0, 1);
-            
+
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');
             $pdf->Cell(4, 4, '', 1, 0);
@@ -973,7 +925,7 @@ class Dosen extends CI_Controller {
             $pdf->Cell(1, 25, '', 0, 1);
             $pdf->Cell(10, 30, '7', 0, 0, 'C');
             $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pelatihan di  D-III Politeknik Harapan tentang software yang digunakan di Perusahaan Saudara?(Jika perlu tuliskan pelatihan yang dibutuhkan :", 0, 1);
-            
+
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');
             $pdf->Cell(4, 4, '', 1, 0);
@@ -1000,12 +952,12 @@ class Dosen extends CI_Controller {
 
             $pdf->Ln(2);
             $pdf->Cell(1, 5, 'Saran untuk peningkatan mutu kerja sama antara D-III Politeknik Harapan bersama dengan Perusahaan Saudara :', 0, 1);
-            
-            $pdf->SetDash(1,1); //5mm on, 5mm off
-            $pdf->Line(12,255,198,255);
-            $pdf->Line(12,260,198,260);
-            $pdf->Line(12,265,198,265);
-            $pdf->Line(12,270,198,270);
+
+            $pdf->SetDash(1, 1); //5mm on, 5mm off
+            $pdf->Line(12, 255, 198, 255);
+            $pdf->Line(12, 260, 198, 260);
+            $pdf->Line(12, 265, 198, 265);
+            $pdf->Line(12, 270, 198, 270);
 
             $pdf->Output($mahasiswa->nim . '_kuisioner_mitra.pdf', 'I');
         }
@@ -1016,7 +968,7 @@ class Dosen extends CI_Controller {
         $data['title'] = 'Profile Dosen';
         $data['page'] = 'profile';
         $data['dosen'] = $this->dosen->getOne($this->session->userdata('id'));
-        
+
         $this->load->view('index', $data);
     }
 
@@ -1115,9 +1067,6 @@ class Dosen extends CI_Controller {
             }
         }
     }
-
 }
 
 /* End of file Dosen.php */
-
-?>
