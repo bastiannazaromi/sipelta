@@ -13,12 +13,12 @@ class Mahasiswa extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Mahasiswa', 'mahasiswa');
         $this->load->model('M_Dosen', 'dosen');
@@ -29,19 +29,17 @@ class Mahasiswa extends CI_Controller
         $data['title'] = 'List Mahasiswa';
         $data['page'] = 'admin/backend/mahasiswa';
 
-        if ($this->u5 != '')
-        {
+        if ($this->u5 != '') {
             $tahun = dekrip($this->u5);
-        }
-        else
-        {
+        } else {
             $tahun = $this->_tahunAkademik();
         }
 
         $data['mahasiswa'] = $this->mahasiswa->getAll(['semester' => dekrip($this->u4), 'tahun' => $tahun], 'tb_mahasiswa');
         $data['dosen'] = $this->dosen->getAll();
         $data['semester'] = $this->u4;
-        $data['tahun']    = $this->mahasiswa->gruptahun();
+        $data['tahun']    = $this->mahasiswa->gruptahun(['semester' => dekrip($this->u4)]);
+        $data['th_ini']    = $tahun;
 
         $this->session->set_userdata('previous_url', current_url());
         $this->load->view('admin/backend/index', $data);
@@ -56,43 +54,34 @@ class Mahasiswa extends CI_Controller
 
         $semester = htmlspecialchars($this->input->post('semester', TRUE));
 
-        if ($semester == 4)
-        {
+        if ($semester == 4) {
             $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        }
-        else
-        {
+        } else {
             $this->form_validation->set_rules('dosbing_2', 'Dosbing 2', 'required');
             $this->form_validation->set_rules('kategori', 'Kategori', 'required');
             $this->form_validation->set_rules('judul', 'Judul', 'required');
         }
 
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('toastr-error', validation_errors());
             $previous_url = $this->session->userdata('previous_url');
             redirect($previous_url);
-        }
-        else
-        {
-            if ($semester == 4)
-            {
-                $dosbing2   = null;
-                $kategori   = null;
-                $judul      = null;
-                $nama_instansi     = htmlspecialchars($this->input->post('nama_instansi', TRUE));
-                $alamat     = htmlspecialchars($this->input->post('alamat', TRUE));
-                $tahun      = $this->_tahunAkademik();
-            }
-            else
-            {
-                $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
-                $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
-                $judul    = htmlspecialchars($this->input->post('judul', TRUE));
-                $nama_instansi   = null;
-                $alamat   = null;
-                $tahun    = $this->_tahunAkademik();
+        } else {
+            if ($semester == 4) {
+                $dosbing2           = null;
+                $kategori           = null;
+                $judul              = null;
+                $nama_instansi      = htmlspecialchars($this->input->post('nama_instansi', TRUE));
+                $alamat             = htmlspecialchars($this->input->post('alamat', TRUE));
+                $tahun              = $this->_tahunAkademik();
+            } else {
+                $dosbing2           = htmlspecialchars($this->input->post('dosbing_2', TRUE));
+                $kategori           = htmlspecialchars($this->input->post('kategori', TRUE));
+                $judul              = htmlspecialchars($this->input->post('judul', TRUE));
+                $nama_instansi      = null;
+                $alamat             = null;
+                $tahun              = $this->_tahunAkademik();
             }
             $data = [
                 "nim"               => htmlspecialchars($this->input->post('nim', TRUE)),
@@ -108,9 +97,9 @@ class Mahasiswa extends CI_Controller
                 "tahun"             => $tahun,
                 "foto"              => 'default.jpg'
             ];
-    
+
             $this->mahasiswa->tambah($data);
-    
+
             $this->session->set_flashdata('toastr-sukses', 'Data berhasil ditambahkan');
             $previous_url = $this->session->userdata('previous_url');
             redirect($previous_url);
@@ -126,36 +115,27 @@ class Mahasiswa extends CI_Controller
 
         $semester = htmlspecialchars($this->input->post('semester', TRUE));
 
-        if ($semester == 4)
-        {
+        if ($semester == 4) {
             $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        }
-        else
-        {
+        } else {
             $this->form_validation->set_rules('dosbing_2', 'Dosbing 2', 'required');
             $this->form_validation->set_rules('kategori', 'Kategori', 'required');
             $this->form_validation->set_rules('judul', 'Judul', 'required');
         }
 
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('toastr-error', validation_errors());
             $previous_url = $this->session->userdata('previous_url');
             redirect($previous_url);
-        }
-        else
-        {
-            if ($semester == 4)
-            {
+        } else {
+            if ($semester == 4) {
                 $dosbing2 = null;
                 $kategori = null;
                 $judul = null;
                 $nama_instansi     = htmlspecialchars($this->input->post('nama_instansi', TRUE));
                 $alamat     = htmlspecialchars($this->input->post('alamat', TRUE));
-            }
-            else
-            {
+            } else {
                 $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
                 $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
                 $judul    = htmlspecialchars($this->input->post('judul', TRUE));
@@ -178,7 +158,7 @@ class Mahasiswa extends CI_Controller
 
             $this->session->set_flashdata('toastr-sukses', 'Data berhasil diupdate');
             $previous_url = $this->session->userdata('previous_url');
-            redirect($previous_url);   
+            redirect($previous_url);
         }
     }
 
@@ -218,13 +198,11 @@ class Mahasiswa extends CI_Controller
     public function import()
     {
         $this->form_validation->set_rules('ktgr', 'kategori', 'required|min_length[2]|max_length[2]');
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('toastr-error', validation_errors());
             $previous_url = $this->session->userdata('previous_url');
             redirect($previous_url);
-        }
-        else {
+        } else {
             // Load plugin PHPExcel nya
             include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
 
@@ -253,12 +231,11 @@ class Mahasiswa extends CI_Controller
 
                 $kategori = $this->input->post('ktgr');
 
-                if ($kategori == 'TA')
-                {
+                if ($kategori == 'TA') {
                     $numrow = 1;
                     foreach ($sheet as $row) {
                         if ($numrow > 1) {
-                            
+
                             $cek = $this->db->get_where('tb_mahasiswa', ['nim' => str_replace('\'', '', $row['B'])])->result_array();
 
                             if ($row['A'] != null) {
@@ -280,13 +257,11 @@ class Mahasiswa extends CI_Controller
                         }
                         $numrow++;
                     }
-                }
-                elseif ($kategori == 'KP')
-                {
+                } elseif ($kategori == 'KP') {
                     $numrow = 1;
                     foreach ($sheet as $row) {
                         if ($numrow > 1) {
-                            
+
                             $cek = $this->db->get_where('tb_mahasiswa', ['nim' => str_replace('\'', '', $row['B'])])->result_array();
 
                             if ($row['A'] != null) {
@@ -313,9 +288,7 @@ class Mahasiswa extends CI_Controller
                     $this->db->insert_batch('tb_mahasiswa', $data);
 
                     $this->session->set_flashdata('flash-sukses', 'Data berhasil di import');
-                }
-                else
-                {
+                } else {
                     $this->session->set_flashdata('flash-error', 'Gagal import ! Data kosong / sudah ada dalam database');
                 }
 

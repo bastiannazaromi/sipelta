@@ -13,12 +13,12 @@ class Brosur extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Brosur', 'brosur');
     }
@@ -28,16 +28,13 @@ class Brosur extends CI_Controller
         $data['title'] = 'List Brosur';
         $data['page'] = 'admin/backend/brosur';
 
-        $data['tahun']    = $this->brosur->gruptahun();
-
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
+        $data['tahun']      = $this->brosur->gruptahun(['semester' => 6]);
+        $data['th_ini']     = $tahun;
 
         $data['brosur'] = $this->brosur->getAll(['tb_mahasiswa.tahun' => $tahun]);
 

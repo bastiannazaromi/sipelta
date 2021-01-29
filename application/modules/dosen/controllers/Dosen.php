@@ -60,9 +60,9 @@ class Dosen extends CI_Controller
         }
 
         $data['mahasiswa'] = $this->dosen->getMhs($this->nama, ['semester' => dekrip($this->u3), 'tahun' => $tahun]);
-        $data['dosen'] = $this->dosen->getAll();
         $data['semester'] = $this->u3;
         $data['tahun']    = $this->dosen->gruptahun($this->nama);
+        $data['th_ini'] = $tahun;
 
         $this->session->set_userdata('previous_url', current_url());
         $this->load->view('index', $data);
@@ -368,9 +368,9 @@ class Dosen extends CI_Controller
         }
 
         $data['mahasiswa'] = $this->dosen->getMhs($this->nama, ['semester' => dekrip($this->u3), 'tahun' => $tahun]);
-        $data['dosen'] = $this->dosen->getAll();
         $data['semester'] = $this->u3;
         $data['tahun']    = $this->dosen->gruptahun($this->nama);
+        $data['th_ini'] = $tahun;
 
         $this->load->view('index', $data);
     }

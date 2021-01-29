@@ -9,8 +9,7 @@ class M_Persetujuan extends CI_Model
         $this->db->select('tb_persetujuan.id, tb_persetujuan.nim, tb_persetujuan.nama_file, tb_persetujuan.status, tb_persetujuan.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_persetujuan');
         $this->db->join('tb_mahasiswa', 'tb_persetujuan.nim = tb_mahasiswa.nim', 'left');
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
         $this->db->order_by('tb_persetujuan.create_at', 'desc');
@@ -54,13 +53,13 @@ class M_Persetujuan extends CI_Model
         $this->db->delete('tb_persetujuan');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }

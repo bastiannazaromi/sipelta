@@ -9,11 +9,10 @@ class M_Laporan_pdf extends CI_Model
         $this->db->select('tb_laporan_pdf.id, tb_laporan_pdf.nim, tb_laporan_pdf.nama_laporan_pdf, tb_laporan_pdf.status, tb_laporan_pdf.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_laporan_pdf');
         $this->db->join('tb_mahasiswa', 'tb_laporan_pdf.nim = tb_mahasiswa.nim', 'left');
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
-        
+
         $this->db->order_by('tb_laporan_pdf.create_at', 'desc');
 
         return $this->db->get()->result_array();
@@ -54,13 +53,13 @@ class M_Laporan_pdf extends CI_Model
         $this->db->delete('tb_laporan_pdf');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }

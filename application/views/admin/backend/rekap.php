@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -33,33 +35,26 @@
                                 foreach ($rekap as $hasil) : ?>
                                 <tr>
                                     <th><?= $i++ ?></th>
-                                    <th><?= $hasil['nama'] ; ?></th>
-                                    <th><?= $hasil['nim'] ; ?></th>
-                                    <th><?= $hasil['no_telepon'] ; ?></th>
-                                    <th><?= $hasil['email'] ; ?></th>
+                                    <th><?= $hasil['nama']; ?></th>
+                                    <th><?= $hasil['nim']; ?></th>
+                                    <th><?= $hasil['no_telepon']; ?></th>
+                                    <th><?= $hasil['email']; ?></th>
                                     <th>
-                                        <?php if ($hasil['semester'] == 4)
-                                        {
-                                            if ($hasil['nama_laporan_pdf'] && $hasil['pengesahan'])
-                                            {
-                                                echo 'Sudah upload berkas';
+                                        <?php if ($hasil['semester'] == 4) {
+                                                if ($hasil['nama_laporan_pdf'] && $hasil['pengesahan']) {
+                                                    echo 'Sudah upload berkas';
+                                                } else {
+                                                    echo 'Belum upload berkas';
+                                                }
+                                            } elseif ($hasil['semester'] == 6) {
+                                                if ($hasil['nama_laporan_pdf'] && $hasil['pengesahan'] && $hasil['persetujuan'] && $hasil['brosur'] && $hasil['produk'] && $hasil['jurnal']) {
+                                                    echo 'Sudah upload berkas';
+                                                } else {
+                                                    echo 'Belum upload berkas';
+                                                }
                                             }
-                                            else{
-                                                echo 'Belum upload berkas';
-                                            }
-                                        }
-                                        elseif ($hasil['semester'] == 6)
-                                        {
-                                            if ($hasil['nama_laporan_pdf'] && $hasil['pengesahan'] && $hasil['persetujuan'] && $hasil['brosur'] && $hasil['produk'] && $hasil['jurnal'])
-                                            {
-                                                echo 'Sudah upload berkas';
-                                            }
-                                            else{
-                                                echo 'Belum upload berkas';
-                                            }
-                                        }
-                                        
-                                        ?>
+
+                                            ?>
                                     </th>
                                 </tr>
                                 <?php endforeach; ?>
@@ -78,7 +73,7 @@
 <script>
 $('#by_tahun').change(function() {
     let tahun = $(this).find(':selected').val();
-    document.location.href = '<?= base_url('admin/rekap/') . $semester . "/" ; ?>' +
+    document.location.href = '<?= base_url('admin/rekap/') . $semester . "/"; ?>' +
         tahun;
 });
 </script>

@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -97,7 +99,7 @@ $(document).ready(function() {
 
     $('#by_tahun').change(function() {
         let tahun = $(this).find(':selected').val();
-        document.location.href = '<?= base_url('admin/jurnal/') ; ?>' +
+        document.location.href = '<?= base_url('admin/jurnal/'); ?>' +
             tahun;
     });
 

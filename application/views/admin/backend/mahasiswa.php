@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -41,7 +43,7 @@
                                     <th>Semester</th>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>Judul</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Dosbing 1</th>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <th>Dosbing 2</th>
@@ -49,7 +51,7 @@
                                     <?php elseif (dekrip($this->u4) == 4) : ?>
                                     <th>Nama Instansi</th>
                                     <th>Alamat Instansi</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Tahun Akademik</th>
                                     <th>Password</th>
                                     <th>Action</th>
@@ -68,7 +70,7 @@
                                     <td><?= $hasil['semester']; ?></td>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <td><?= $hasil['judul']; ?></td>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <td><?= $hasil['dosbing_1']; ?></td>
                                     <?php if (dekrip($this->u4) == 6) : ?>
                                     <td><?= $hasil['dosbing_2']; ?></td>
@@ -76,7 +78,7 @@
                                     <?php elseif (dekrip($this->u4) == 4) : ?>
                                     <td><?= $hasil['nama_instansi']; ?></td>
                                     <td><?= $hasil['alamat']; ?></td>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <td><?= $hasil['tahun']; ?></td>
 
                                     <td><a href="<?= base_url() ?>admin/mahasiswa/resetPassword/<?= enkrip($hasil['id']); ?>"
@@ -108,7 +110,7 @@
                                     <th>-</th>
                                     <?php else : ?>
                                     <th>-</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
@@ -259,7 +261,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group dosbing_2_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>">
+                    <div class="form-group dosbing_2_edit <?= ($dt['semester'] == 4) ? 'd-none' : ''; ?>">
                         <label for="dosbing_2">Dosen Pembimbing 2</label>
                         <select class="custom-select" name="dosbing_2">
                             <option value="">-- Pilih Dosen --</option>
@@ -270,7 +272,7 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="form-group kategori_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>">
+                    <div class="form-group kategori_edit <?= ($dt['semester'] == 4) ? 'd-none' : ''; ?>">
                         <label for="kategori">Kategori</label>
                         <select class="custom-select" name="kategori">
                             <option value="">-- Pilih Kategori --</option>
@@ -285,16 +287,16 @@
                             </option>
                         </select>
                     </div>
-                    <div class="form-group judul_edit <?= ($dt['semester'] == 4) ? 'd-none' : '' ; ?>"">
+                    <div class="form-group judul_edit <?= ($dt['semester'] == 4) ? 'd-none' : ''; ?>"">
                         <label for=" judul">Judul</label>
                         <textarea class="form-control" name="judul" autocomplete="off"><?= $dt['judul']; ?></textarea>
                     </div>
-                    <div class="form-group tempat_edit <?= ($dt['semester'] == 6) ? 'd-none' : '' ; ?>">
+                    <div class="form-group tempat_edit <?= ($dt['semester'] == 6) ? 'd-none' : ''; ?>">
                         <label for="tempat">Nama Instansi</label>
                         <textarea class="form-control" name="nama_instansi"
                             autocomplete="off"><?= $dt['nama_instansi']; ?></textarea>
                     </div>
-                    <div class="form-group alamat_edit <?= ($dt['semester'] == 6) ? 'd-none' : '' ; ?>">
+                    <div class="form-group alamat_edit <?= ($dt['semester'] == 6) ? 'd-none' : ''; ?>">
                         <label for="tempat">Alamat Instansi</label>
                         <textarea class="form-control" name="alamat" autocomplete="off"><?= $dt['alamat']; ?></textarea>
                     </div>
@@ -399,7 +401,7 @@ $(document).ready(function() {
 
     $('#by_tahun').change(function() {
         let tahun = $(this).find(':selected').val();
-        document.location.href = '<?= base_url('admin/mahasiswa/semester/') . $semester . "/" ; ?>' +
+        document.location.href = '<?= base_url('admin/mahasiswa/semester/') . $semester . "/"; ?>' +
             tahun;
     });
 

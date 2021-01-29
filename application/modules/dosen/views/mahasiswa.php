@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -26,7 +28,7 @@
                                     <th>Semester</th>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <th>Judul</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Dosbing 1</th>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <th>Dosbing 2</th>
@@ -34,7 +36,7 @@
                                     <?php elseif (dekrip($this->u3) == 4) : ?>
                                     <th>Nama Instansi</th>
                                     <th>Alamat Instansi</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Tahun Akademik</th>
                                 </tr>
                             </thead>
@@ -48,7 +50,7 @@
                                     <td><?= $hasil['semester']; ?></td>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <td><?= $hasil['judul']; ?></td>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <td><?= $hasil['dosbing_1']; ?></td>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <td><?= $hasil['dosbing_2']; ?></td>
@@ -56,7 +58,7 @@
                                     <?php elseif (dekrip($this->u3) == 4) : ?>
                                     <td><?= $hasil['nama_instansi']; ?></td>
                                     <td><?= $hasil['alamat']; ?></td>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <td><?= $hasil['tahun']; ?></td>
 
                                 </tr>
@@ -77,7 +79,7 @@
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>-</th>
                                 </tr>
                             </tfoot>
@@ -142,7 +144,7 @@ $(document).ready(function() {
 
     $('#by_tahun').change(function() {
         let tahun = $(this).find(':selected').val();
-        document.location.href = '<?= base_url('dosen/mahasiswa/') . $semester . "/" ; ?>' +
+        document.location.href = '<?= base_url('dosen/mahasiswa/') . $semester . "/"; ?>' +
             tahun;
     });
 

@@ -9,8 +9,7 @@ class M_Brosur extends CI_Model
         $this->db->select('tb_brosur.id, tb_brosur.nim, tb_brosur.nama_file, tb_brosur.status, tb_brosur.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_brosur');
         $this->db->join('tb_mahasiswa', 'tb_brosur.nim = tb_mahasiswa.nim', 'left');
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
         $this->db->order_by('tb_brosur.create_at', 'desc');
@@ -54,13 +53,13 @@ class M_Brosur extends CI_Model
         $this->db->delete('tb_brosur');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }

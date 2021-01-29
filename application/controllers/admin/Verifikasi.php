@@ -13,12 +13,12 @@ class Verifikasi extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Mahasiswa', 'mahasiswa');
         $this->load->model('M_Jurnal', 'jurnal');
@@ -35,12 +35,9 @@ class Verifikasi extends CI_Controller
 
     public function index()
     {
-        if ($this->u5 == '')
-        {
+        if ($this->u5 == '') {
             $tahun = $this->_tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u5);
         }
 
@@ -49,13 +46,12 @@ class Verifikasi extends CI_Controller
         $data['title'] = 'Verifikasi File';
         $data['page'] = 'admin/backend/verifikasi';
         $data['semester']   = $this->u4;
-        $data['tahun']      = $this->verifikasi->grupTahun();
+        $data['tahun']      = $this->verifikasi->gruptahun(['semester' => $semester]);
+        $data['th_ini']     = $tahun;
 
-        if ($semester == 4)
-        {
+        if ($semester == 4) {
             $data['mahasiswa'] = $this->verifikasi->getKP($tahun);
-        }
-        else{
+        } else {
             $data['mahasiswa'] = $this->verifikasi->getTA($tahun);
         }
 
@@ -70,13 +66,9 @@ class Verifikasi extends CI_Controller
 
         $mhs = $this->mahasiswa->getOne(dekrip($nim));
 
-        if ($mhs[0]['semester'] == 6)
-        {
+        if ($mhs[0]['semester'] == 6) {
             $this->_cekfileTA(dekrip($nim));
-        }
-
-        else
-        {
+        } else {
             $this->_cekfileKP(dekrip($nim));
         }
 
@@ -173,7 +165,7 @@ class Verifikasi extends CI_Controller
     {
         $laporan_pdf = $this->laporan_pdf->getOne($nim);
         $pengesahan = $this->pengesahan->getOne($nim);
-        
+
         if ($laporan_pdf) {
             $j_lap_pdf = $laporan_pdf[0]['nama_laporan_pdf'];
             $s_lap_pdf = $laporan_pdf[0]['status'];
@@ -188,7 +180,7 @@ class Verifikasi extends CI_Controller
             $j_pengesahan = null;
             $s_pengesahan = null;
         }
-        
+
         $this->data['berkas'] = [
             "0" => [
                 "berkas" => 'laporan_pdf',

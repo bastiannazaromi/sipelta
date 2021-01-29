@@ -10,11 +10,10 @@ class M_Pengesahan extends CI_Model
         $this->db->from('tb_pengesahan');
         $this->db->join('tb_mahasiswa', 'tb_pengesahan.nim = tb_mahasiswa.nim', 'left');
 
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
-        
+
         $this->db->order_by('tb_pengesahan.create_at', 'desc');
 
         return $this->db->get()->result_array();
@@ -56,13 +55,13 @@ class M_Pengesahan extends CI_Model
         $this->db->delete('tb_pengesahan');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }

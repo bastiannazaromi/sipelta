@@ -13,30 +13,28 @@ class Jurnal extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Jurnal', 'jurnal');
     }
 
     public function index()
     {
-        $data['title'] = 'List Jurnal PDF';
-        $data['page'] = 'admin/backend/jurnal';
-        $data['tahun']    = $this->jurnal->gruptahun();
-
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
+
+        $data['title'] = 'List Jurnal PDF';
+        $data['page'] = 'admin/backend/jurnal';
+        $data['tahun']    = $this->jurnal->gruptahun(['semester' => 6]);
+        $data['th_ini']    = $tahun;
 
         $data['jurnal'] = $this->jurnal->getAll(['tb_mahasiswa.tahun' => $tahun]);
 

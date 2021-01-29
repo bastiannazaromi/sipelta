@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -28,7 +30,7 @@
                                     <th>Nama</th>
                                     <?php if ($this->u3 == "ta") : ?>
                                     <th>Judul TA</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Nama Laporan</th>
                                     <th>Tanggal</th>
                                     <th>Status</th>
@@ -45,8 +47,8 @@
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
                                     <?php if ($this->u3 == "ta") : ?>
-                                    <td><?= $hasil['judul'] ; ?></td>
-                                    <?php endif ; ?>
+                                    <td><?= $hasil['judul']; ?></td>
+                                    <?php endif; ?>
                                     <td>
                                         <a href="<?= base_url('assets/uploads/laporan_pdf/' . $hasil['nama_laporan_pdf']); ?>"
                                             target="_blank"><?= $hasil['nama_laporan_pdf']; ?></a>
@@ -76,7 +78,7 @@
                                     <th>-</th>
                                     <?php if ($this->u3 == "ta") : ?>
                                     <th>-</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>
                                         <center>
                                             <button type="submit" class="btn btn-danger btn-sm"
@@ -103,7 +105,7 @@ $(document).ready(function() {
 
     $('#by_tahun').change(function() {
         let tahun = $(this).find(':selected').val();
-        document.location.href = '<?= base_url('admin/laporan_pdf/') . $kategori . "/" ; ?>' +
+        document.location.href = '<?= base_url('admin/laporan_pdf/') . $kategori . "/"; ?>' +
             tahun;
     });
 

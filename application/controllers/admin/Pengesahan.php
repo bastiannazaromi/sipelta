@@ -13,12 +13,12 @@ class Pengesahan extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Pengesahan', 'pengesahan');
     }
@@ -28,17 +28,21 @@ class Pengesahan extends CI_Controller
         $data['title'] = 'List Lembar Pengesahan';
         $data['page'] = 'admin/backend/pengesahan';
         $data['kategori']   = $this->u3;
-        $data['tahun']      = $this->pengesahan->gruptahun();
 
-        if ($this->u4 == '')
-        {
-            $tahun = tahunAkademik();
+        if ($this->u3 == 'ta') {
+            $semester = 6;
+        } else {
+            $semester = 4;
         }
-        else
-        {
+
+        if ($this->u4 == '') {
+            $tahun = tahunAkademik();
+        } else {
             $tahun = dekrip($this->u4);
         }
 
+        $data['tahun']      = $this->pengesahan->gruptahun(['semester' => $semester]);
+        $data['th_ini']     = $tahun;
         $data['pengesahan'] = $this->pengesahan->getAll(['tb_pengesahan.kategori' => $this->u3, 'tb_mahasiswa.tahun' => $tahun]);
 
         $this->load->view('admin/backend/index', $data);

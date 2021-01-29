@@ -6,11 +6,10 @@ class M_Mahasiswa extends CI_Model
 
     public function getAll($where, $tabel)
     {
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
-        
+
         $this->db->order_by('nim');
         $data = $this->db->get($tabel)->result_array();
         return $data;
@@ -59,13 +58,13 @@ class M_Mahasiswa extends CI_Model
         $this->db->delete('tb_mahasiswa');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }

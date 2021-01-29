@@ -1,8 +1,9 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_Verifikasi extends CI_Model {
+class M_Verifikasi extends CI_Model
+{
 
     public function getKP($tahun)
     {
@@ -32,16 +33,15 @@ class M_Verifikasi extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
-        return $this->db->get('tb_mahasiswa')->result_array();
-        
-    }
 
+        return $this->db->get('tb_mahasiswa')->result_array();
+    }
 }
 
 /* End of file M_verifikasi.php */

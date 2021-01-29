@@ -8,8 +8,10 @@
                         <select class="custom-select" id="by_tahun" name="by_tahun">
                             <option value="">-- Pilih Tahun --</option>
                             <?php foreach ($tahun as $hasil) : ?>
-                            <option value="<?= enkrip($hasil['tahun']) ; ?>"><?= $hasil['tahun'] ; ?></option>
-                            <?php endforeach ; ?>
+                            <option value="<?= enkrip($hasil['tahun']); ?>"
+                                <?= ($th_ini == $hasil['tahun']) ? 'selected="selected"' : ''; ?>>
+                                <?= $hasil['tahun']; ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
@@ -27,7 +29,7 @@
                                     <th>Judul</th>
                                     <?php else : ?>
                                     <th>Nama Instansi</th>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -44,7 +46,7 @@
                                     <td><?= $hasil['judul']; ?></td>
                                     <?php else : ?>
                                     <td><?= $hasil['nama_instansi']; ?></td>
-                                    <?php endif ; ?>
+                                    <?php endif; ?>
                                     <td>
                                         <div class="badge <?= status_file($hasil['nim']) == 'Terverifikasi' ? 'btn-success' : 'badge-warning'; ?>"
                                             role="alert">
@@ -73,7 +75,7 @@
 <script>
 $('#by_tahun').change(function() {
     let tahun = $(this).find(':selected').val();
-    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/" ; ?>' +
+    document.location.href = '<?= base_url('admin/verifikasi/kategori/') . $semester . "/"; ?>' +
         tahun;
 });
 </script>

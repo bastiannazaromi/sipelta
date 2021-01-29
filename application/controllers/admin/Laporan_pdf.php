@@ -13,31 +13,35 @@ class Laporan_pdf extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Laporan_pdf', 'laporan_pdf');
     }
 
     public function index()
     {
+        if ($this->u4 == '') {
+            $tahun = tahunAkademik();
+        } else {
+            $tahun = dekrip($this->u4);
+        }
+
+        if ($this->u3 == 'ta') {
+            $semester = 6;
+        } else {
+            $semester = 4;
+        }
+
         $data['title']      = 'List Laporan PDF';
         $data['page']       = 'admin/backend/laporan_pdf';
         $data['kategori']   = $this->u3;
-        $data['tahun']      = $this->laporan_pdf->gruptahun();
-
-        if ($this->u4 == '')
-        {
-            $tahun = tahunAkademik();
-        }
-        else
-        {
-            $tahun = dekrip($this->u4);
-        }
+        $data['tahun']      = $this->laporan_pdf->gruptahun(['semester' => $semester]);
+        $data['th_ini']     = $tahun;
 
         $data['laporan_pdf'] = $this->laporan_pdf->getAll(['tb_laporan_pdf.kategori' => $this->u3, 'tb_mahasiswa.tahun' => $tahun]);
 

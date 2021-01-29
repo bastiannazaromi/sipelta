@@ -13,12 +13,12 @@ class Lembar_produk extends CI_Controller
             redirect('admin/auth', 'refresh');
         }
 
-        $this->u2		= $this->uri->segment(2);
-        $this->u3		= $this->uri->segment(3);
-        $this->u4		= $this->uri->segment(4);
-        $this->u5		= $this->uri->segment(5);
-        $this->u6		= $this->uri->segment(6);
-        $this->u7		= $this->uri->segment(7);
+        $this->u2        = $this->uri->segment(2);
+        $this->u3        = $this->uri->segment(3);
+        $this->u4        = $this->uri->segment(4);
+        $this->u5        = $this->uri->segment(5);
+        $this->u6        = $this->uri->segment(6);
+        $this->u7        = $this->uri->segment(7);
 
         $this->load->model('M_Lembar_produk', 'lembar_produk');
     }
@@ -28,17 +28,13 @@ class Lembar_produk extends CI_Controller
         $data['title'] = 'List Lembar Penyerahan Produk';
         $data['page'] = 'admin/backend/lembar_produk';
 
-        $data['tahun']    = $this->lembar_produk->gruptahun();
-
-        if ($this->u3 == '')
-        {
+        if ($this->u3 == '') {
             $tahun = tahunAkademik();
-        }
-        else
-        {
+        } else {
             $tahun = dekrip($this->u3);
         }
-
+        $data['tahun']      = $this->lembar_produk->gruptahun(['semester' => 6]);
+        $data['th_ini']     = $tahun;
         $data['lembar_produk'] = $this->lembar_produk->getAll(['tb_mahasiswa.tahun' => $tahun]);
 
         $this->load->view('admin/backend/index', $data);

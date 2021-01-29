@@ -9,8 +9,7 @@ class M_Jurnal extends CI_Model
         $this->db->select('tb_jurnal.id, tb_jurnal.nim, tb_jurnal.nama_jurnal, tb_jurnal.status, tb_jurnal.create_at, tb_mahasiswa.nama, tb_mahasiswa.judul');
         $this->db->from('tb_jurnal');
         $this->db->join('tb_mahasiswa', 'tb_jurnal.nim = tb_mahasiswa.nim', 'inner');
-        if ($where)
-        {
+        if ($where) {
             $this->db->where($where);
         }
         $this->db->order_by('tb_jurnal.create_at', 'desc');
@@ -54,13 +53,13 @@ class M_Jurnal extends CI_Model
         $this->db->delete('tb_jurnal');
     }
 
-    public function gruptahun()
+    public function gruptahun($where)
     {
         $this->db->select('tahun');
+        $this->db->where($where);
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'ASC');
-        
+
         return $this->db->get('tb_mahasiswa')->result_array();
-        
     }
 }
