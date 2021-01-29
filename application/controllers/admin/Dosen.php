@@ -34,22 +34,21 @@ class Dosen extends CI_Controller
         $this->form_validation->set_rules('nidn', 'NIDN', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required');
 
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('toastr-error', validation_errors());
             redirect('admin/dosen');
-        }
-        else {
+        } else {
             $data = [
                 "nama"          => htmlspecialchars($this->input->post('nama', TRUE)),
                 "nipy"          => htmlspecialchars($this->input->post('nipy', TRUE)),
                 "nidn"          => htmlspecialchars($this->input->post('nidn', TRUE)),
                 "username"      => htmlspecialchars($this->input->post('username', TRUE)),
-                "password"      => password_hash('dosen', PASSWORD_DEFAULT)
+                "password"      => password_hash('dosen', PASSWORD_DEFAULT),
+                'foto'          => 'default.jpg'
             ];
-    
+
             $this->dosen->tambah($data);
-    
+
             $this->session->set_flashdata('toastr-sukses', 'Data berhasil ditambahkan');
             redirect('admin/dosen');
         }
@@ -62,25 +61,22 @@ class Dosen extends CI_Controller
         $this->form_validation->set_rules('nidn', 'NIDN', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required');
 
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('toastr-error', validation_errors());
             redirect('admin/dosen');
-        }
-        else {
+        } else {
             $data = [
                 "nama"          => htmlspecialchars($this->input->post('nama', TRUE)),
                 "nipy"          => htmlspecialchars($this->input->post('nipy', TRUE)),
                 "nidn"          => htmlspecialchars($this->input->post('nidn', TRUE)),
                 "username"      => htmlspecialchars($this->input->post('username', TRUE))
             ];
-    
+
             $this->dosen->edit($data);
-    
+
             $this->session->set_flashdata('toastr-sukses', 'Data berhasil diupdate');
             redirect('admin/dosen');
         }
-        
     }
 
     public function resetPassword($id)
@@ -91,12 +87,10 @@ class Dosen extends CI_Controller
 
         $update = $this->universal->update($data, ['id' => $id], 'tb_dosen');
 
-        if ($update)
-        {
+        if ($update) {
             $this->session->set_flashdata('toastr-sukses', 'Password berhasil direset');
             redirect('admin/dosen');
-        }
-        else {
+        } else {
             $this->session->set_flashdata('toastr-error', 'Password gagal direset');
             redirect('admin/dosen');
         }
@@ -148,7 +142,8 @@ class Dosen extends CI_Controller
                                 'nipy' => htmlspecialchars(str_replace('\'', '', $row['C'])),
                                 'nidn' => htmlspecialchars(str_replace('\'', '', $row['D'])),
                                 'username' => htmlspecialchars(str_replace('\'', '', $row['E'])),
-                                'password' => password_hash(str_replace('\'', '', $row['E']), PASSWORD_DEFAULT),
+                                'password' => password_hash(str_replace('\'', '', 'dosen'), PASSWORD_DEFAULT),
+                                'foto'          => 'default.jpg'
                             ));
                         }
                     }
