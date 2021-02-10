@@ -5,7 +5,6 @@ class M_Auth extends CI_Model
 {
 	function cek_login($u, $p)
 	{
-
 		$this->db->where('username', $u);
 		$query = $this->db->get('tb_admin');
 		$data = $query->result();
@@ -14,7 +13,7 @@ class M_Auth extends CI_Model
 			if (password_verify($p, $data[0]->password)) {
 				$login		=	array(
 					'is_logged_in'	=> 	true,
-					'username'			=>	$u,
+					'username'		=>	$u,
 					'id'			=>	$data[0]->id,
 					'nama'			=>	$data[0]->nama
 				);
