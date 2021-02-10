@@ -62,5 +62,6 @@ class Auth extends CI_Controller
     }
 }
 
+// contoh git
 /* End of file Auth.php */
 /* Location: ./application/controllers/Auth.php */
