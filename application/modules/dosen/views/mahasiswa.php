@@ -26,6 +26,7 @@
                                     <th>NIM</th>
                                     <th>Nama</th>
                                     <th>Semester</th>
+                                    <th>No Telepon</th>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <th>Judul</th>
                                     <?php endif; ?>
@@ -48,6 +49,7 @@
                                     <td><?= $hasil['nim']; ?></td>
                                     <td><?= $hasil['nama']; ?></td>
                                     <td><?= $hasil['semester']; ?></td>
+                                    <td><?= $hasil['no_telepon']; ?></td>
                                     <?php if (dekrip($this->u3) == 6) : ?>
                                     <td><?= $hasil['judul']; ?></td>
                                     <?php endif; ?>
@@ -66,6 +68,7 @@
                             </tbody>
                             <tfoot>
                                 <tr class="table table-warning">
+                                    <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
