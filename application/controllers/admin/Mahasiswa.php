@@ -57,6 +57,7 @@ class Mahasiswa extends CI_Controller
         if ($semester == 4) {
             $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('no_telepon', 'No Telepon', 'required|numeric');
         } else {
             $this->form_validation->set_rules('dosbing_2', 'Dosbing 2', 'required');
             $this->form_validation->set_rules('kategori', 'Kategori', 'required');
@@ -74,6 +75,7 @@ class Mahasiswa extends CI_Controller
                 $judul              = null;
                 $nama_instansi      = htmlspecialchars($this->input->post('nama_instansi', TRUE));
                 $alamat             = htmlspecialchars($this->input->post('alamat', TRUE));
+                $no_telepon         = htmlspecialchars($this->input->post('no_telepon', TRUE));
                 $tahun              = $this->_tahunAkademik();
             } else {
                 $dosbing2           = htmlspecialchars($this->input->post('dosbing_2', TRUE));
@@ -81,6 +83,7 @@ class Mahasiswa extends CI_Controller
                 $judul              = htmlspecialchars($this->input->post('judul', TRUE));
                 $nama_instansi      = null;
                 $alamat             = null;
+                $no_telepon         = null;
                 $tahun              = $this->_tahunAkademik();
             }
             $data = [
@@ -94,6 +97,7 @@ class Mahasiswa extends CI_Controller
                 "dosbing_2"         => $dosbing2,
                 "nama_instansi"     => $nama_instansi,
                 "alamat"            => $alamat,
+                "no_telepon"        => $no_telepon,
                 "tahun"             => $tahun,
                 "foto"              => 'default.jpg'
             ];
@@ -118,6 +122,7 @@ class Mahasiswa extends CI_Controller
         if ($semester == 4) {
             $this->form_validation->set_rules('nama_instansi', 'Nama Instansi', 'required');
             $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+            $this->form_validation->set_rules('no_telepon', 'No Telepon', 'required|numeric');
         } else {
             $this->form_validation->set_rules('dosbing_2', 'Dosbing 2', 'required');
             $this->form_validation->set_rules('kategori', 'Kategori', 'required');
@@ -135,12 +140,14 @@ class Mahasiswa extends CI_Controller
                 $judul = null;
                 $nama_instansi     = htmlspecialchars($this->input->post('nama_instansi', TRUE));
                 $alamat     = htmlspecialchars($this->input->post('alamat', TRUE));
+                $no_telepon         = htmlspecialchars($this->input->post('no_telepon', TRUE));
             } else {
                 $dosbing2 = htmlspecialchars($this->input->post('dosbing_2', TRUE));
                 $kategori = htmlspecialchars($this->input->post('kategori', TRUE));
                 $judul    = htmlspecialchars($this->input->post('judul', TRUE));
                 $nama_instansi   = null;
                 $alamat   = null;
+                $no_telepon         = null;
             }
             $data = [
                 "nim"               => htmlspecialchars($this->input->post('nim', TRUE)),
@@ -151,7 +158,8 @@ class Mahasiswa extends CI_Controller
                 "dosbing_1"         => htmlspecialchars($this->input->post('dosbing_1', TRUE)),
                 "dosbing_2"         => $dosbing2,
                 "nama_instansi"     => $nama_instansi,
-                "alamat"            => $alamat
+                "alamat"            => $alamat,
+                "no_telepon"        => $no_telepon,
             ];
 
             $this->mahasiswa->edit($data);
