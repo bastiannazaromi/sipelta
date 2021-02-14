@@ -267,13 +267,14 @@ class Mahasiswa extends CI_Controller
                             if ($row['A'] != null) {
                                 if (!$cek) {
                                     array_push($data, array(
-                                        'nim' => htmlspecialchars(str_replace('\'', '', $row['B'])),
-                                        'password' => password_hash(str_replace('\'', '', $row['B']), PASSWORD_DEFAULT),
+                                        'nim'           => htmlspecialchars(str_replace('\'', '', $row['B'])),
+                                        'password'      => password_hash(str_replace('\'', '', $row['B']), PASSWORD_DEFAULT),
                                         'nama'          => htmlspecialchars($row['C']),
                                         'semester'      => htmlspecialchars(str_replace('\'', '', $row['D'])),
                                         'dosbing_1'     => htmlspecialchars($row['E']),
                                         'nama_instansi' => htmlspecialchars($row['F']),
                                         'alamat'        => htmlspecialchars($row['G']),
+                                        'no_telepon'    => htmlspecialchars(str_replace('\'', '', $row['H'])),
                                         'tahun'         => $this->_tahunAkademik(),
                                         'foto'          => 'default.jpg'
                                     ));
