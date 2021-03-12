@@ -389,7 +389,7 @@ class Dosen extends CI_Controller
 
             $pdf->SetFont('Times', 'B', 12);
             $pdf->Cell(190, 6, 'BERITA ACARA', 0, 1, 'C');
-            $pdf->Cell(190, 6, 'PENYELENGGARAAN SUPERVISI KERJA PRAKTEK', 0, 1, 'C');
+            $pdf->Cell(190, 6, 'PENYELENGGARAAN SUPERVISI KERJA PRAKTIK', 0, 1, 'C');
             $pdf->Cell(190, 6, 'TAHUN AKADEMIK ' . $mahasiswa->tahun, 0, 1, 'C');
             $pdf->Cell(190, 6, 'MAHASISWA POLITEKNIK HARAPAN BERSAMA TEGAL', 0, 1, 'C');
 
@@ -474,7 +474,7 @@ class Dosen extends CI_Controller
             $pdf->Image('assets/uploads/poltek.png', 11, 10, 20, 20);
 
             $pdf->Cell(30, 6, '');
-            $pdf->Cell(1, 6, 'SUPERVISI KERJA PRAKTEK', 0, 1);
+            $pdf->Cell(1, 6, 'SUPERVISI KERJA PRAKTIK', 0, 1);
             $pdf->Cell(30, 6, '');
             $pdf->Cell(1, 6, 'SEMESTER GANJIL THN. AKADEMIK 2017/2018', 0, 1);
             $pdf->Cell(30, 6, '');
@@ -533,15 +533,15 @@ class Dosen extends CI_Controller
 
             $pdf->Cell(1, 6, '');
             $pdf->Cell(7, 6, '2.', 0, 0);
-            $pdf->Cell(1, 6, 'IDENTITAS TEMPAT KERJA PRAKTEK', 0, 1);
+            $pdf->Cell(1, 6, 'IDENTITAS TEMPAT KERJA PRAKTIK', 0, 1);
 
             $pdf->SetFont('Times', '', 12);
             $pdf->Cell(8, 6, '', 0, 0);
-            $pdf->Cell(50, 6, 'Tempat Kerja Praktek', 0, 0);
+            $pdf->Cell(50, 6, 'Tempat Kerja Praktik', 0, 0);
             $pdf->Cell(3, 6, ':', 0, 0);
             $pdf->Cell(1, 6, $mahasiswa->nama_instansi, 0, 1);
             $pdf->Cell(8, 6, '', 0, 0);
-            $pdf->Cell(50, 6, 'Alamat Kerja Praktek', 0, 0);
+            $pdf->Cell(50, 6, 'Alamat Kerja Praktik', 0, 0);
             $pdf->Cell(3, 6, ':', 0, 0);
             $pdf->Cell(1, 6, $mahasiswa->alamat, 0, 1);
             $pdf->Cell(8, 6, '', 0, 0);
@@ -591,11 +591,11 @@ class Dosen extends CI_Controller
             $pdf->Cell(1, 12, '', 0, 1);
             $pdf->Cell(8, 7, '');
             $pdf->SetFillColor(229, 229, 204);
-            $pdf->MUltiCell(140, 6, 'PERSIAPAN KERJA PRAKTEK', 1, 'L', 1);
+            $pdf->MUltiCell(140, 6, 'PERSIAPAN KERJA PRAKTIK', 1, 'L', 1);
             $pdf->SetFont('Times', '', 10);
             $pdf->Cell(8, 6, '');
             $pdf->Cell(10, 6, '1', 1, 0, 'C');
-            $pdf->Cell(100, 6, 'Pemilihan tempat kerja praktek', 1, 0);
+            $pdf->Cell(100, 6, 'Pemilihan tempat kerja praktik', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
@@ -614,7 +614,7 @@ class Dosen extends CI_Controller
 
             $pdf->SetFont('Times', 'I', 10);
             $pdf->Cell(8, 6, '');
-            $pdf->MultiCell(140, 6, 'PELAKSANAAN KERJA PRAKTEK', 1, 'L', 1);
+            $pdf->MultiCell(140, 6, 'PELAKSANAAN KERJA PRAKTIK', 1, 'L', 1);
             $pdf->SetFont('Times', '', 10);
             $xPos = $pdf->GetX();
             $yPos = $pdf->GetY();
@@ -667,7 +667,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(1, 12, '', 0, 1);
             $pdf->Cell(8, 6, '');
             $pdf->Cell(10, 6, '8', 1, 0, 'C');
-            $pdf->Cell(100, 6, 'Tanggung jawab mahasiswa saat  melakukan kerja praktek', 1, 0);
+            $pdf->Cell(100, 6, 'Tanggung jawab mahasiswa saat melakukan kerja praktik', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 1);
@@ -902,7 +902,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(20, 5, 'Tidak Perlu', 1, 1, 'C');
 
             $pdf->Cell(10, 25, '6', 0, 0, 'C');
-            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pertemuan rutin  D-III Politeknik Harapan dengan Perusahaan Saudara?(Jika perlu tolong berikan masukan pertemuan yang diinginkan :", 0, 1);
+            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pertemuan rutin  D-III Politeknik Harapan dengan Perusahaan Saudara? (Jika perlu tolong berikan masukan pertemuan yang diinginkan :", 0, 1);
 
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');
@@ -924,7 +924,7 @@ class Dosen extends CI_Controller
 
             $pdf->Cell(1, 25, '', 0, 1);
             $pdf->Cell(10, 30, '7', 0, 0, 'C');
-            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pelatihan di  D-III Politeknik Harapan tentang software yang digunakan di Perusahaan Saudara?(Jika perlu tuliskan pelatihan yang dibutuhkan :", 0, 1);
+            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pelatihan di D-III Politeknik Harapan tentang software yang digunakan di Perusahaan Saudara?(Jika perlu tuliskan pelatihan yang dibutuhkan :", 0, 1);
 
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');
