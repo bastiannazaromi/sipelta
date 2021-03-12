@@ -208,6 +208,10 @@
                         <label for="tempat">Alamat Instansi</label>
                         <textarea class="form-control" name="alamat" autocomplete="off"></textarea>
                     </div>
+                    <div class="form-group notelp_tambah d-none">
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="text" class="form-control" name="no_telepon" required autocomplete="off">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -303,6 +307,11 @@
                         <label for="tempat">Alamat Instansi</label>
                         <textarea class="form-control" name="alamat" autocomplete="off"><?= $dt['alamat']; ?></textarea>
                     </div>
+                    <div class="form-group notelp_edit <?= ($dt['semester'] == 6) ? 'd-none' : ''; ?>">
+                        <label for="no_telepon">No Telepon</label>
+                        <input type="text" class="form-control" name="no_telepon" required autocomplete="off"
+                            value="<?= $dt['no_telepon']; ?>">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -372,12 +381,14 @@ $(document).ready(function() {
                 $('.judul_tambah').removeClass('d-none');
                 $('.tempat_tambah').addClass('d-none');
                 $('.alamat_tambah').addClass('d-none');
+                $('.notelp_tambah').addClass('d-none');
             } else {
                 $('.dosbing_2_tambah').addClass('d-none');
                 $('.kategori_tambah').addClass('d-none');
                 $('.judul_tambah').addClass('d-none');
                 $('.tempat_tambah').removeClass('d-none');
                 $('.alamat_tambah').removeClass('d-none');
+                $('.notelp_tambah').removeClass('d-none');
             }
         });
     });
@@ -392,12 +403,14 @@ $(document).ready(function() {
                 $('.judul_edit').removeClass('d-none');
                 $('.tempat_edit').addClass('d-none');
                 $('.alamat_edit').addClass('d-none');
+                $('.notelp_edit').addClass('d-none');
             } else {
                 $('.dosbing_2_edit').addClass('d-none');
                 $('.kategori_edit').addClass('d-none');
                 $('.judul_edit').addClass('d-none');
                 $('.tempat_edit').removeClass('d-none');
                 $('.alamat_edit').removeClass('d-none');
+                $('.notelp_edit').removeClass('d-none');
             }
         });
     });

@@ -593,7 +593,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(1, 12, '', 0, 1);
             $pdf->Cell(8, 7, '');
             $pdf->SetFillColor(229, 229, 204);
-            $pdf->MUltiCell(140, 6, 'PERSIAPAN KERJA PRAKTOK', 1, 'L', 1);
+            $pdf->MUltiCell(140, 6, 'PERSIAPAN KERJA PRAKTIK', 1, 'L', 1);
             $pdf->SetFont('Times', '', 10);
             $pdf->Cell(8, 6, '');
             $pdf->Cell(10, 6, '1', 1, 0, 'C');
@@ -669,7 +669,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(1, 12, '', 0, 1);
             $pdf->Cell(8, 6, '');
             $pdf->Cell(10, 6, '8', 1, 0, 'C');
-            $pdf->Cell(100, 6, 'Tanggung jawab mahasiswa saat  melakukan kerja praktik', 1, 0);
+            $pdf->Cell(100, 6, 'Tanggung jawab mahasiswa saat melakukan kerja praktik', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 0);
             $pdf->Cell(10, 6, '', 1, 1);
@@ -904,7 +904,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(20, 5, 'Tidak Perlu', 1, 1, 'C');
 
             $pdf->Cell(10, 25, '6', 0, 0, 'C');
-            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pertemuan rutin  D-III Politeknik Harapan dengan Perusahaan Saudara?(Jika perlu tolong berikan masukan pertemuan yang diinginkan :", 0, 1);
+            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pertemuan rutin  D-III Politeknik Harapan dengan Perusahaan Saudara? (Jika perlu tolong berikan masukan pertemuan yang diinginkan :", 0, 1);
 
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');
@@ -926,7 +926,7 @@ class Dosen extends CI_Controller
 
             $pdf->Cell(1, 25, '', 0, 1);
             $pdf->Cell(10, 30, '7', 0, 0, 'C');
-            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pelatihan di  D-III Politeknik Harapan tentang software yang digunakan di Perusahaan Saudara?(Jika perlu tuliskan pelatihan yang dibutuhkan :", 0, 1);
+            $pdf->MultiCell(140, 5, "Apakah perlu dilakukan pelatihan di D-III Politeknik Harapan tentang software yang digunakan di Perusahaan Saudara?(Jika perlu tuliskan pelatihan yang dibutuhkan :", 0, 1);
 
             $pdf->Cell(10, 5, '');
             $pdf->Cell(2, 5, '');

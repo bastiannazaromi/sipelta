@@ -956,7 +956,7 @@ class Dapur extends CI_Controller
         $pdf->Cell(1, 5, '', 0, 1);
         $pdf->Cell(135, 5, '', 0, 0);
         $pdf->Cell(1, 5, 'Mengetahui,', 0, 1);
-        $pdf->Cell(135, 5, 'Ketua Program Studi DIII Teknik Komputer', 0, 0);
+        $pdf->Cell(135, 5, 'Kepala Program Studi DIII Teknik Komputer', 0, 0);
         $pdf->Cell(1, 6, 'Mahasiswa', 0, 1);
         $pdf->Cell(1, 6, 'Politeknik Harapan Bersama Tegal', 0, 1);
         $pdf->Cell(1, 5, '', 0, 1);
