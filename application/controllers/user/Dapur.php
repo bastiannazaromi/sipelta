@@ -1045,7 +1045,7 @@ class Dapur extends CI_Controller
 
         $pdf->Ln(4);
 
-        $pdf->Cell(190, 7, 'FORM VALIDASI PENYERAHAN LAPORAN KERJA PRAKTEK', 0, 1, 'C');
+        $pdf->Cell(190, 7, 'FORM VALIDASI PENYERAHAN LAPORAN KERJA PRAKTIK', 0, 1, 'C');
 
         $pdf->Cell(10, 2, '', 0, 1);
 
@@ -1067,53 +1067,8 @@ class Dapur extends CI_Controller
         $pdf->Cell(4, 6, ':', 0, 0);
         $pdf->Cell(2, 6, $mahasiswa[0]['dosbing_1'], 0, 1);
 
-        $pdf->Cell(35, 6, 'Judul', 0, 0);
-        $pdf->Cell(4, 6, ':', 0, 0);
-
-        $judul = $mahasiswa[0]['judul'];
-
-        $cellWidth = 155;
-        $cellHeight = 6;
-
-        if ($pdf->GetStringWidth($judul) < $cellWidth) {
-            $line = 1;
-        } else {
-
-            $textLength = strlen($judul);
-            $errMargin = 5;
-            $startChar = 0;
-            $maxChar = 0;
-            $textArray = array();
-            $tmpString = "";
-
-            while ($startChar < $textLength) {
-                while (
-                    $pdf->GetStringWidth($tmpString) < ($cellWidth - $errMargin) &&
-                    ($startChar + $maxChar) < $textLength
-                ) {
-                    $maxChar++;
-                    $tmpString = substr($judul, $startChar, $maxChar);
-                }
-
-                $startChar = $startChar + $maxChar;
-
-                array_push($textArray, $tmpString);
-
-                $maxChar = 0;
-                $tmpString = '';
-            }
-
-            $line = count($textArray);
-        }
-
-        $pdf->MultiCell($cellWidth, $cellHeight, $judul, 0, 1);
-
-        $xPos = $pdf->GetX();
-        $yPos = $pdf->GetY();
-
-        $pdf->SetXY($xPos, $yPos);
-
-        $pdf->Cell(35, 6, 'Penerima Laporan Kerja Praktek : ', 0, 1);
+        $pdf->Ln(3);
+        $pdf->Cell(35, 6, 'Penerima Laporan Kerja Praktik : ', 0, 1);
 
         $pdf->Ln(1);
 
@@ -1145,7 +1100,7 @@ class Dapur extends CI_Controller
         $pdf->Cell(1, 5, '', 0, 1);
         $pdf->Cell(135, 5, '', 0, 0);
         $pdf->Cell(1, 5, 'Mengetahui,', 0, 1);
-        $pdf->Cell(135, 5, 'Ketua Program Studi DIII Teknik Komputer', 0, 0);
+        $pdf->Cell(135, 5, 'Kepala Program Studi DIII Teknik Komputer', 0, 0);
         $pdf->Cell(1, 6, 'Mahasiswa', 0, 1);
         $pdf->Cell(1, 6, 'Politeknik Harapan Bersama Tegal', 0, 1);
         $pdf->Cell(1, 5, '', 0, 1);
