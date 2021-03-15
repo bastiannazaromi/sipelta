@@ -476,7 +476,7 @@ class Dosen extends CI_Controller
             $pdf->Cell(30, 6, '');
             $pdf->Cell(1, 6, 'SUPERVISI KERJA PRAKTIK', 0, 1);
             $pdf->Cell(30, 6, '');
-            $pdf->Cell(1, 6, 'SEMESTER GANJIL THN. AKADEMIK ' . $mahasiswa->tahun, 0, 1);
+            $pdf->Cell(1, 6, 'SEMESTER GENAP THN. AKADEMIK ' . $mahasiswa->tahun, 0, 1);
             $pdf->Cell(30, 6, '');
             $pdf->Cell(105, 6, 'POLITEKNIK HARAPAN BERSAMA TEGAL', 0, 0);
             $pdf->SetFont('Times', '', 10);
