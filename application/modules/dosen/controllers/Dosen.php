@@ -767,8 +767,7 @@ class Dosen extends CI_Controller
 
             $pdf->SetFont('Times', '', 11);
 
-            $demi = 'Demi meningkatkan kerja sama yang telah dilakukan selama tahun 2010-2014 antara mitra dengan prodi D-III Politeknik Harapan Bersama, maka kami mengharap kesediaan Saudara untuk mengisi kuisioner berikut sesuai dengan keadaan sebenarnya. Lembar penilaian ini ditujukan untuk meningkatkan mutu proses pembelajaran dan lulusannya, sehingga para lulusan dari D-III Teknik komputer Politeknik Harapan Bersama Tegal dapat siap diberdayakan oleh stakeholder/user.';
-
+            $demi = 'Demi meningkatkan kerja sama yang telah dilakukan selama tahun 2018 - 2021 antara mitra dengan prodi D-III Politeknik Harapan Bersama, maka kami mengharap kesediaan Saudara untuk mengisi kuisioner berikut sesuai dengan keadaan sebenarnya. Lembar penilaian ini ditujukan untuk meningkatkan mutu proses pembelajaran dan lulusannya, sehingga para lulusan dari D-III Teknik komputer Politeknik Harapan Bersama Tegal dapat siap diberdayakan oleh stakeholder/user.';
             $pdf->SetFillColor(255, 255, 255);
 
             $pdf->MultiCell(192, 5, $demi, 0, 'FJ', 1);
